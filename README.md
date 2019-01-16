@@ -28,4 +28,4 @@ Brandon Pon ([@brandonapon](https://github.com/brandonapon))
   <img height="300px" src="https://github.com/saurabhhgupta/PiCloud/blob/master/pictures/brandon.jpg" alt="Brandon Pon Photo">
 </p>
 
-Vivek Pradhan
+Vivek Pradhan ([@vivek1729](https://github.com/vivek1729))
