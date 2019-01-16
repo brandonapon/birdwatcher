@@ -21,7 +21,7 @@ Saurabh Gupta ([@saurabhhgupta](https://github.com/saurabhhgupta))
   <img height="300px" src="https://github.com/saurabhhgupta/PiCloud/blob/master/pictures/saurabh.jpg" alt="Saurabh Gupta Photo">
 </p>
 
-Sydney Ma
+Sydney Ma ([@sidiinia](https://github.com/sidiinia))
 
 Brandon Pon ([@brandonapon](https://github.com/brandonapon))
 <p align="center">
