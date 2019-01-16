@@ -1,7 +1,7 @@
 import sched
 import datetime, time
 
-class periodic_scheduler:
+class Scheduler:
     def __init__(self):
         self.scheduler = sched.scheduler(time.time, time.sleep)
 

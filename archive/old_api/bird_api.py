@@ -5,12 +5,11 @@ import random
 import string
 import math
 
-#helper truncate function
 def truncate(number, digits) -> float:
     stepper = pow(10.0, digits)
     return math.trunc(stepper * number) / stepper
 
-class bird_watch:
+class BirdWatcher:
     def __init__(self):
         self.login_url = 'https://api.bird.co/user/login'
         self.guid = ''
@@ -31,7 +30,7 @@ class bird_watch:
     # Randomly generates 16 byte GUID/UUID and 10 character long email (ex: 2dUc51@gmail.com)
     def update_login_info(self):
         self.guid = str(uuid.uuid4())
-        self.email = ''.join(random.choice(string.ascii_uppercase+string.digits+string.ascii_lowercase) for i in range(10)) + '@gmail.com'
+        self.email = ''.join(random.choice(string.ascii_uppercase + string.digits + string.ascii_lowercase) for i in range(10)) + '@gmail.com'
         self.login_request_body['email'] = self.email
         self.login_request_headers['Device-id'] = self.guid
 
@@ -60,13 +59,13 @@ class bird_watch:
         longitude = str(truncate(longitude, 5))
         altitude = str(int(altitude))
         radius = str(int(radius))
-        self.search_url = 'https://api.bird.co/bird/nearby?latitude='+latitude+'&longitude='+longitude+'&radius='+radius
+        self.search_url = 'https://api.bird.co/bird/nearby?latitude=' + latitude + '&longitude=' + longitude + '&radius=' + radius
         print(self.search_url)
         self.search_headers = {
-            'Authorization': 'Bird '+self.token,
+            'Authorization': 'Bird ' + self.token,
             'Device-id': self.guid,
             'App-Version': '3.0.5',
-            'Location': json.dumps({'latitude':latitude, 'longitude': longitude,'altitude': altitude,'accuracy': 100,'speed':-1,'heading':-1})
+            'Location': json.dumps({'latitude': latitude, 'longitude': longitude,'altitude': altitude,'accuracy': 100,'speed': -1,'heading': -1})
         }
         print(self.search_headers)
 
@@ -78,7 +77,7 @@ class bird_watch:
             try:
                 search_result = requests.get(url=self.search_url, headers=self.search_headers)
             except:
-                attempt +=1
+                attempt += 1
                 print ("attempt ", attempt)
         if attempt < 10:
             print('Query successful')
