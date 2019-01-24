@@ -83,7 +83,7 @@ class BirdWatcher:
                 print ("attempt ", attempt)
         if attempt < 10:
             print('Query successful')    
-            print(search_result.text)
+            # print(search_result.text)
             return search_result.text
         else:
             print('Query unsuccessful, attempted ', attempt, " times")
