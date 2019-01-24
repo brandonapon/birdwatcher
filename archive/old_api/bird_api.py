@@ -4,6 +4,8 @@ import uuid
 import random
 import string
 import math
+import datetime
+import os, os.path
 
 def truncate(number, digits) -> float:
     stepper = pow(10.0, digits)
@@ -80,7 +82,7 @@ class BirdWatcher:
                 attempt += 1
                 print ("attempt ", attempt)
         if attempt < 10:
-            print('Query successful')
+            print('Query successful')    
             print(search_result.text)
             return search_result.text
         else:
@@ -89,6 +91,10 @@ class BirdWatcher:
             return search_result
 
     def export_to_file(self, filename, data):
+        filename = '/home/pi/Desktop/git/birdwatcher/archive/old_api/data_dump/output_'+str(datetime.datetime.now())+'.txt'
         file = open(filename, 'a')
+        header = str(datetime.datetime.now().time())
+        header += '\n'
+        file.write(header)
         file.write(data)
         file.close()
