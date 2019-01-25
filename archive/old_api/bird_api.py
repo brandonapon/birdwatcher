@@ -6,6 +6,7 @@ import string
 import math
 import datetime
 import os, os.path
+import time
 
 def truncate(number, digits) -> float:
     stepper = pow(10.0, digits)
@@ -91,7 +92,7 @@ class BirdWatcher:
             return search_result
 
     def export_to_file(self, filename, data):
-        filename = '/home/pi/Desktop/git/birdwatcher/archive/old_api/data_dump/output_'+str(datetime.datetime.now())+'.txt'
+        filename = '/home/pi/Desktop/git/birdwatcher/archive/old_api/data_dump/'+time.strftime("%Y%m%d-%H%M%S")+'.txt'
         file = open(filename, 'a')
         header = str(datetime.datetime.now().time())
         header += '\n'
