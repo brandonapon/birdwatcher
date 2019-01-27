@@ -2,6 +2,7 @@
 
 '''
 Contains code to utilize google maps for plotting of data.
+refer to: https://github.com/tcassou/mapsplotlib for details on usage of package
 '''
 import matplotlib as mpl
 mpl.use('TkAgg') # workaround for MacOS due to backend diff. Refer to comment on answer: https://stackoverflow.com/a/21789908
@@ -9,7 +10,6 @@ from mapsplotlib import mapsplot as mplt
 import pandas as pd
 import os
 import sys
-
 
 def main():
     # import CSV file
