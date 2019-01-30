@@ -90,9 +90,9 @@ class BirdWatcher:
             print('Query unsuccessful, attempted ', attempt, " times")
             # print(search_result.text)
             return search_result
-
     def export_to_file(self, filename, data):
-        filename = '/home/pi/Desktop/git/birdwatcher/archive/old_api/data_dump/'+time.strftime("%Y%m%d-%H%M%S")+'.txt'
+        # filename = '/home/pi/Desktop/git/birdwatcher/archive/old_api/data_dump/'+time.strftime("%Y%m%d-%H%M%S")+'.txt'
+        filename = (os.path.join(os.path.dirname(os.path.realpath(__file__)), "data_dump")+"/"+time.strftime("%Y%m%d-%H%M%S")+".txt")
         file = open(filename, 'a')
         header = str(datetime.datetime.now().time())
         header += '\n'
