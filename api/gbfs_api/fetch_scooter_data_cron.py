@@ -10,7 +10,7 @@ from datetime import datetime
 s = requests.Session()
 FETCH_URL = "https://mds.bird.co/gbfs/los-angeles/free_bikes"
 LAST_UPDATED = None
-DATA_DIR = '/home/pi/Desktop/git/birdwatcher/archive/gbfs_api/'
+DATA_DIR = '/home/pi/Desktop/git/birdwatcher/api/gbfs_api/'
 SLEEP_TIME = 5 #in seconds
 TODAY = datetime.today().strftime('%Y-%m-%d')
 DL_PATH = DATA_DIR+TODAY
