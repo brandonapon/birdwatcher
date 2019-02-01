@@ -1,0 +1,2 @@
+09:50:03.992525
+{"birds":[{"id":"1b0c89e3-0d9a-4c04-b1da-cde55f1f6249","location":{"latitude":34.413093333333336,"longitude":-119.85782666666667},"code":"","captive":false,"battery_level":99},{"id":"375510e6-e1f0-4a8d-b3da-10d35dea9960","location":{"latitude":34.41308166666667,"longitude":-119.85783333333332},"code":"","captive":false,"battery_level":100},{"id":"2fdbc375-de29-4097-bc50-d582e0fcf65f","location":{"latitude":34.409485000000004,"longitude":-119.86005333333333},"code":"","captive":false,"battery_level":97}],"clusters":[],"areas":[]}
