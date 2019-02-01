@@ -1,0 +1,2 @@
+13:50:04.431822
+{"birds":[{"id":"47601b10-447d-4e0f-a155-254344418d99","location":{"latitude":34.422188,"longitude":-119.852627},"code":"","captive":false,"battery_level":35}],"clusters":[],"areas":[]}
