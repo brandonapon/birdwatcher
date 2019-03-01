@@ -28,6 +28,9 @@ class BirdWatcher:
         self.login_response_raw = ''
         self.token = ''
         self.search_url = ''
+        self.config_url = ''
+        self.latitude = 0
+        self.longitude = 0
         self.search_headers = None
 
     # Randomly generates 16 byte GUID/UUID and 10 character long email (ex: 2dUc51@gmail.com)
@@ -58,19 +61,29 @@ class BirdWatcher:
 
     # Sets location and radius of search in meters(?)
     def set_search(self, latitude, longitude, altitude, radius):
-        latitude = str(truncate(latitude, 5))
-        longitude = str(truncate(longitude, 5))
+        self.latitude = str(truncate(latitude, 5))
+        self.longitude = str(truncate(longitude, 5))
         altitude = str(int(altitude))
         radius = str(int(radius))
-        self.search_url = 'https://api.bird.co/bird/nearby?latitude=' + latitude + '&longitude=' + longitude + '&radius=' + radius
+        self.search_url = 'https://api.bird.co/bird/nearby?latitude=' + self.latitude + '&longitude=' + self.longitude + '&radius=' + radius
         print(self.search_url)
         self.search_headers = {
             'Authorization': 'Bird ' + self.token,
             'Device-id': self.guid,
             'App-Version': '3.0.5',
-            'Location': json.dumps({'latitude': latitude, 'longitude': longitude,'altitude': altitude,'accuracy': 100,'speed': -1,'heading': -1})
+            'Location': json.dumps({'latitude': self.latitude, 'longitude': self.longitude,'altitude': altitude,'accuracy': 100,'speed': -1,'heading': -1})
         }
         print(self.search_headers)
+
+    def config_req(self):
+        self.config_url = 'https://api.bird.co/config/location?latitude={}&longitude={}'.format(self.latitude, self.longitude)
+        self.config_header = {
+            'App-Version' : '3.0.5'
+        }
+        print(self.config_url)
+        print(self.config_header)
+        config_result = requests.get(url=self.config_url, headers=self.config_header)
+        return config_result
 
     # Uses generated token to grab birds in the specified radius and location
     def pull_data(self):
@@ -83,7 +96,7 @@ class BirdWatcher:
                 attempt += 1
                 print ("attempt ", attempt)
         if attempt < 10:
-            print('Query successful')    
+            print('Query successful')
             # print(search_result.text)
             return search_result.text
         else:
@@ -99,3 +112,27 @@ class BirdWatcher:
         file.write(header)
         file.write(data)
         file.close()
+
+    def export_to_file_weekend(self, filename, data):
+        filename = (os.path.join(os.path.dirname(os.path.realpath(__file__)), "weekend_dump")+"/"+time.strftime("%Y%m%d-%H%M%S")+".txt")
+        file = open(filename, 'a')
+        header = str(datetime.datetime.now().time())
+        header += '\n'
+        file.write(header)
+        file.write(data)
+        file.close()
+
+if __name__ == '__main__':
+    birdwatcher = BirdWatcher()
+    birdwatcher.update_login_info()
+    print(birdwatcher.email, birdwatcher.guid)
+    birdwatcher.login()
+    birdwatcher.set_search(34.413112,-119.855395, 10, 1200)
+    # result = birdwatcher.pull_data()
+    # print(result)
+    config_result = birdwatcher.config_req()
+    json_config = json.loads(config_result.text)
+    # print(json.dumps(json_config, indent=4, sort_keys=True))
+    file = open('Config.txt', 'w')
+    file.write(json.dumps(json_config, indent=4))
+    file.close()
