@@ -113,6 +113,15 @@ class BirdWatcher:
         file.write(data)
         file.close()
 
+    def export_to_file_weekend(self, filename, data):
+        filename = (os.path.join(os.path.dirname(os.path.realpath(__file__)), "weekend_dump")+"/"+time.strftime("%Y%m%d-%H%M%S")+".txt")
+        file = open(filename, 'a')
+        header = str(datetime.datetime.now().time())
+        header += '\n'
+        file.write(header)
+        file.write(data)
+        file.close()
+
 if __name__ == '__main__':
     birdwatcher = BirdWatcher()
     birdwatcher.update_login_info()
