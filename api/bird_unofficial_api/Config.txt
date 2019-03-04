@@ -1,240 +1,6 @@
 {
-    "enable_physical_lock_unlock": true,
     "enable_physical_lock_lock": true,
-    "ios_min_version": "1.0.0",
-    "ios_charger_min_version": "3.1.9",
-    "android_min_version": "1.0.0",
-    "android_charger_min_version": "3.4.0",
-    "bluetooth_firmware": {
-        "version": 38,
-        "model": "es",
-        "force": true
-    },
-    "automated_analytics": {
-        "enabled": true,
-        "roles": {
-            "mechanic": false,
-            "bird_watcher": true,
-            "charger": false,
-            "rider": false,
-            "operator": false
-        }
-    },
-    "hide_missing_threshold": 2,
-    "enable_community_mode": true,
-    "enable_report_bad_riding": false,
-    "require_drivers_license": true,
-    "use_microblink_id_scanner": true,
-    "enable_contact_invite": false,
-    "max_unlock_distance": 500,
-    "operator_release_distance": 5000,
-    "request_end_ride_photo": true,
-    "menu_charger_start_rides": 0,
-    "charger_short_code": true,
-    "show_nest_release": true,
-    "nest_create_radius": 27.43,
-    "release_start_hour": 4.0,
     "release_end_hour": 17.0,
-    "mech_scan_to_release": true,
-    "enable_due_time": true,
-    "limited_data_on_validate": false,
-    "enable_block_capture_on_overdue": true,
-    "charger_can_mark_damaged": true,
-    "cloudflare_sdk_enabled": true,
-    "disable_power_supplies": true,
-    "enable_capture_flow_v2_charger": true,
-    "enable_bounty_filter_charger": true,
-    "enable_capture_flow_v2_mechanic": true,
-    "enable_bounty_filter_mechanic": true,
-    "android_bird_watcher": {
-        "enable_birdwatcher_toolbox": true,
-        "enable_birdwatcher_map_filter": false,
-        "enable_birdwatcher_bird_profile": true,
-        "enable_birdwatcher_update_damage_status": true,
-        "enable_birdwatcher_replace_qr": true,
-        "enable_birdwatcher_report_large_pile": true,
-        "enable_birdwatcher_report_missing_id": true,
-        "enable_birdwatcher_log_repairs": true,
-        "inspection": {
-            "enabled": false,
-            "test_ride_enabled": false,
-            "max_photos": 4
-        },
-        "mark_damaged_options": {
-            "damaged_brain": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "flat_tire": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "cut_wires": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "other": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            }
-        },
-        "enable_replace_physical_locks": false
-    },
-    "ios_bird_watcher": {
-        "enable_birdwatcher_toolbox": true,
-        "enable_birdwatcher_map_filter": false,
-        "enable_birdwatcher_bird_profile": true,
-        "enable_birdwatcher_update_damage_status": true,
-        "enable_birdwatcher_replace_qr": true,
-        "enable_birdwatcher_report_large_pile": true,
-        "enable_birdwatcher_report_missing_id": true,
-        "enable_birdwatcher_log_repairs": true,
-        "inspection": {
-            "enabled": false,
-            "test_ride_enabled": false,
-            "max_photos": 4
-        },
-        "mark_damaged_options": {
-            "damaged_brain": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "flat_tire": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "cut_wires": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            },
-            "other": {
-                "enabled": true,
-                "marks_damage": false,
-                "sends_zendesk_ticket": false
-            }
-        },
-        "enable_replace_physical_locks": false
-    },
-    "bird_watcher_distance_check": true,
-    "enable_automatic_tracking_mechanic": false,
-    "android_damage_nest": {
-        "show_charger_damage_drops": false,
-        "enable_charger_reserve_damage_drops": false,
-        "enable_charger_damage_nest_intro": false,
-        "enable_headlight_toggle": false,
-        "enable_rider_scan_modal": false
-    },
-    "ios_damage_nest": {
-        "show_charger_damage_drops": false,
-        "enable_charger_reserve_damage_drops": false,
-        "enable_charger_damage_nest_intro": false,
-        "enable_headlight_toggle": false,
-        "enable_rider_scan_modal": false
-    },
-    "android_storage_nest": {
-        "show_storage_nests": false,
-        "mech_storage_nest_intro": false,
-        "force_release_admin_approval": false
-    },
-    "ios_storage_nest": {
-        "show_storage_nests": false,
-        "mech_storage_nest_intro": false,
-        "force_release_admin_approval": false
-    },
-    "scan_gun_storage_nest": {
-        "show_storage_nests": false,
-        "mech_storage_nest_intro": false,
-        "force_release_admin_approval": false
-    },
-    "enable_priority_collect_android": false,
-    "enable_priority_collect_ios": false,
-    "android_charger": {
-        "enable_mark_damage": true,
-        "enable_improved_task_list": false,
-        "mark_damaged_copy_updates": false,
-        "enable_report_multiple_birds_rider": false,
-        "enable_report_multiple_birds_charger": false,
-        "block_bounty_map_on_task_limit_reached": false,
-        "enable_community_mode": false,
-        "enable_release_flow_v2_for_drops": false,
-        "enable_active_bluetooth_sweep": false,
-        "require_bluetooth_on_capture": false
-    },
-    "ios_charger": {
-        "enable_mark_damage": true,
-        "enable_improved_task_list": false,
-        "mark_damaged_copy_updates": false,
-        "enable_report_multiple_birds_rider": false,
-        "enable_report_multiple_birds_charger": false,
-        "block_bounty_map_on_task_limit_reached": false,
-        "enable_community_mode": false,
-        "enable_release_flow_v2_for_drops": false,
-        "enable_active_bluetooth_sweep": false,
-        "require_bluetooth_on_capture": false
-    },
-    "android_mechanic": {
-        "enable_mark_damage": true,
-        "enable_drop_map": false,
-        "show_issues_to_mechs": false,
-        "enable_release_flow_v2": false
-    },
-    "ios_mechanic": {
-        "enable_mark_damage": true,
-        "enable_drop_map": false,
-        "show_issues_to_mechs": false,
-        "enable_release_flow_v2": false
-    },
-    "android_contractor": {
-        "enable_nest_map_v2": false
-    },
-    "ios_contractor": {
-        "enable_nest_map_v2": true
-    },
-    "ios_parking": {
-        "show_parking_nests": false,
-        "parking_incentive_success_message": "",
-        "skip_photo_for_parking_incentives": false,
-        "parking_banner_instructions": "",
-        "unenforced_no_parking_text": "",
-        "enforced_no_parking_text": ""
-    },
-    "android_parking": {
-        "show_parking_nests": false,
-        "parking_incentive_success_message": "",
-        "skip_photo_for_parking_incentives": false,
-        "parking_banner_instructions": "",
-        "unenforced_no_parking_text": "",
-        "enforced_no_parking_text": ""
-    },
-    "priority_collect_message": "",
-    "can_fix_qr": true,
-    "enable_task_list_actions_v2": false,
-    "enable_task_list_v2": true,
-    "enable_task_list_actions_v2_wont_charge_action": false,
-    "enable_task_list_actions_v2_wont_power_on_action": false,
-    "enable_task_list_actions_v2_damaged_action": false,
-    "enable_task_list_actions_v2_indirect_cancel": true,
-    "become_charger_banner_copy": "",
-    "enable_new_charger_onboarding_intro": true,
-    "enable_drop_feedback_charger": true,
-    "skip_charger_onboard_before": "2018-05-15T15:25:00+07:00",
-    "force_charger_agreement_before": "2018-06-20T10:00:00+07:00",
-    "enable_operator_mode": true,
-    "dynamic_agreements_for_riders": true,
-    "dynamic_agreements_for_contractors": true,
-    "enable_zendesk_sdk": true,
-    "enable_configurable_contractor_onboarding": false,
-    "enable_admin_needs_parts_button": true,
-    "microblink_license_key": "LBHMFKYW-QSSSOTE4-O5BN35VU-ADIABUAA-2AANAAGQ-ADIABUAA-2AANAAGQ-ADIHOQUZ",
-    "safety_menu_url": "http://www.bird.co/safety-first",
-    "enable_give_free_rides": false,
     "banner_steps": [
         {
             "rides": 0,
@@ -245,160 +11,214 @@
             "banner": "charger_start"
         }
     ],
-    "rider_tutorial": {
-        "steps": [
-            {
-                "id": "find_and_unlock",
-                "title": "FIND & UNLOCK",
-                "body": "Find a Bird near you and tap the button to unlock.",
-                "file_name": "rt_find_and_unlock",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 0.9,
-                "delay_loop_start": 5.0
+    "enable_block_capture_on_overdue": true,
+    "enable_task_list_actions_v2": false,
+    "bounty": {
+        "bounty_filter_price_step": 100,
+        "currency": "usd",
+        "bounty_filter_price_max": 2000,
+        "charger_power_supply_deposit_amount": 1000
+    },
+    "blur_physical_lock_combination": false,
+    "delivery": {
+        "release_window_start_hour": 3,
+        "locked_ride_end_hour": 10,
+        "pay_as_you_go": true,
+        "enable_delivery_menu_item": false,
+        "expire_routes_after_minutes": 45,
+        "release_radius": 40.0,
+        "currency": "usd",
+        "release_window_end_hour": 7,
+        "ios_enable_charger_delivery": false,
+        "weekday_price": 0,
+        "release_window_end_hour_client": 6,
+        "charger_can_schedule_delivery": true,
+        "force_ride_end_hour": 22,
+        "use_new_merged_delivery_screen": true,
+        "cancellation_fee": 500,
+        "enabled": false,
+        "weekend_price": 0
+    },
+    "local": {
+        "contractor_zone_radius": 1000.0,
+        "in_service": true,
+        "current_service_status": "IN_SERVICE",
+        "helmet_min_rides": 1,
+        "name": "Santa Barbara - Isla Vista, East ",
+        "weather_alert": false,
+        "no_service_period": "12am - 4am",
+        "formatted_service_hours": "12am - 4am"
+    },
+    "charger_short_code": true,
+    "enable_task_list_actions_v2_indirect_cancel": true,
+    "enable_drop_feedback_charger": true,
+    "ios_damage_nest": {
+        "enable_rider_scan_modal": false,
+        "enable_charger_reserve_damage_drops": false,
+        "enable_headlight_toggle": false,
+        "enable_charger_damage_nest_intro": false,
+        "show_charger_damage_drops": false
+    },
+    "enable_preferred_parking_v0": false,
+    "enable_contact_invite": false,
+    "show_physical_lock_last_non_compliant_modal": false,
+    "show_price_on_scanner": "never",
+    "charger_can_mark_damaged": true,
+    "enable_bounty_filter_mechanic": true,
+    "local_config": {
+        "contractor_zone_radius": 1000.0,
+        "in_service": true,
+        "current_service_status": "IN_SERVICE",
+        "helmet_min_rides": 1,
+        "name": "Santa Barbara - Isla Vista, East ",
+        "weather_alert": false,
+        "no_service_period": "12am - 4am",
+        "formatted_service_hours": "12am - 4am"
+    },
+    "bluetooth_firmware": {
+        "model": "es",
+        "version": 38,
+        "force": true
+    },
+    "ride": {
+        "auto_pay_start_after_ride_count": -1,
+        "minimum_ride_price": 0,
+        "currency": "usd",
+        "auto_pay_prompt_first": false,
+        "smartlock_cable_lock_flow_image_url": [],
+        "auto_pay_mandatory": false,
+        "base_price": 100,
+        "maximum_free_ride_amount": 500,
+        "auto_pay_refill_amount": 0,
+        "auto_pay_mandatory_min_balance": 0,
+        "auto_pay_nag_every_ride_count": 0,
+        "included_minutes": 0,
+        "ios_rider_v2_enabled": false,
+        "auto_pay_use_fullscreen_flow": false,
+        "auto_pay_incentive_amount": 0,
+        "additional_fees": {
+            "apply_tax": false,
+            "fees": [],
+            "hide_tax_in_pricing_description": true
+        },
+        "accept_provisional_id": true,
+        "minimum_user_balance": -500,
+        "minute_price": 20,
+        "smartlock_cable_unlock_flow_image_url": [],
+        "localized_dynamic_price_string": "USD 1 to start and USD 0.20/minute.",
+        "ios_rider_v2_min_version": "4.17.0",
+        "price_change_exp_in_treatment_group": false
+    },
+    "show_parking_nests": false,
+    "enable_physical_lock_charger_release_message": false,
+    "enable_charger_snooze_release": false,
+    "enable_task_list_actions_v2_damaged_action": false,
+    "android_block_mock_location_providers": false,
+    "enable_automatic_tracking_mechanic": false,
+    "ios_bird_watcher": {
+        "enable_new_repair_log_options": false,
+        "enable_birdwatcher_update_damage_status": true,
+        "enable_birdwatcher_bird_profile": true,
+        "inspection": {
+            "test_ride_enabled": false,
+            "enabled": false,
+            "max_photos": 4
+        },
+        "mark_damaged_options": {
+            "flat_tire": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
             },
-            {
-                "id": "start_bird_m365",
-                "title": "START BIRD",
-                "body": "Stand on Bird, push-off, then push throttle button with thumb to ride.",
-                "file_name": "rt_start_the_bird_m365",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
+            "other": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
             },
-            {
-                "id": "start_bird_es",
-                "title": "START BIRD",
-                "body": "Stand on Bird, push-off, then push throttle button with thumb to ride.",
-                "file_name": "rt_start_the_bird_es",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
+            "damaged_brain": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
             },
-            {
-                "id": "foot_placement",
-                "title": "FOOT PLACEMENT",
-                "body": "Place both feet on footboard while riding.",
-                "file_name": "rt_foot_placement",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
-            },
-            {
-                "id": "where_to_ride",
-                "title": "WHERE TO RIDE",
-                "body": "Ride in bike lanes, no riding on sidewalks.",
-                "file_name": "rt_where_to_ride",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
-            },
-            {
-                "id": "brakes_m365",
-                "title": "BRAKES",
-                "body": "Squeeze brake with left hand to slow down.",
-                "file_name": "rt_brakes_m365",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.2,
-                "progress_loop_end": 0.8,
-                "delay_loop_start": 5.0
-            },
-            {
-                "id": "brakes_es",
-                "title": "BRAKES",
-                "body": "Squeeze brake with left hand to slow down.",
-                "file_name": "rt_brakes_es",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.2,
-                "progress_loop_end": 0.8,
-                "delay_loop_start": 5.0
-            },
-            {
-                "id": "parking_1",
-                "title": "PARKING",
-                "body": "Don't block public pathways. Park by bike racks when available.",
-                "file_name": "rt_parking_1",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 5.0
-            },
-            {
-                "id": "parking_2",
-                "title": "PARKING",
-                "body": "Park on the street and obey parking rules, including street sweeping and painted curbs.",
-                "file_name": "rt_parking_2",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.29,
-                "progress_loop_end": 0.9,
-                "delay_loop_start": 0.0
-            },
-            {
-                "id": "parking_3",
-                "title": "PARKING",
-                "body": "Park in metered spaces, in-between cars.",
-                "file_name": "rt_parking_3",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.25,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
-            },
-            {
-                "id": "parking_4",
-                "title": "PARKING",
-                "body": "You can also park at the end of a car row, curb, or in designated motorcycle parking.",
-                "file_name": "rt_parking_4",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.18,
-                "progress_loop_end": 0.8,
-                "delay_loop_start": 0.0
-            },
-            {
-                "id": "ending_you_ride",
-                "title": "ENDING YOUR RIDE",
-                "body": "End your ride by tapping the button within the app.",
-                "file_name": "rt_ending_your_ride",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 0.8,
-                "delay_loop_start": 5.0
-            },
-            {
-                "id": "safe_riding",
-                "title": "SAFE RIDING",
-                "body": "Bring your own helmet to stay safe while you ride.",
-                "file_name": "rt_safe_riding",
-                "loop_file_name": "rt_safe_riding_2",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 1.0
-            },
-            {
-                "id": "local_rule",
-                "title": "LOCAL RULES",
-                "subtitle": "\u223c",
-                "body": "\u2022 Riding on sidewalks\n\u2022 Riding in public parking structures\n\u2022 Riding without a helmet\n\u2022 Riding without a valid driver's license",
-                "progress_start": 0.0,
-                "progress_loop_start": 0.0,
-                "progress_loop_end": 1.0,
-                "delay_loop_start": 0.0
+            "cut_wires": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
             }
-        ],
-        "all": [
-            "find_and_unlock",
-            "safe_riding",
-            "start_bird_m365",
-            "foot_placement",
-            "where_to_ride",
-            "brakes_m365",
-            "parking_1",
-            "ending_you_ride",
-            "local_rule"
+        },
+        "enable_birdwatcher_log_repairs": true,
+        "enable_birdwatcher_toolbox": true,
+        "enable_birdwatcher_report_missing_id": true,
+        "enable_birdwatcher_replace_qr": true,
+        "enable_birdwatcher_map_filter": false,
+        "enable_replace_physical_locks": false,
+        "enable_birdwatcher_report_large_pile": true
+    },
+    "enable_multi_country_microblink_license_scanning": false,
+    "priority_collect_message": "",
+    "enable_operator_mode": true,
+    "menu_charger_start_rides": 0,
+    "android_min_version": "1.0.0",
+    "skip_charger_onboard_before": "2018-05-15T15:25:00+07:00",
+    "enable_admin_needs_parts_button": true,
+    "ios_gov_tech": {
+        "community_mode_max_photos_input": 5,
+        "enable_community_mode_v2": true
+    },
+    "ios_mechanic": {
+        "enable_mark_damage": true,
+        "show_issues_to_mechs": false,
+        "enable_drop_map": true,
+        "enable_release_flow_v2": false
+    },
+    "android_charger_min_version": "3.4.0",
+    "require_drivers_license": true,
+    "ios_parking": {
+        "enforced_no_parking_text": "",
+        "unenforced_no_parking_text": "",
+        "show_parking_nests": false,
+        "skip_photo_for_parking_incentives": false,
+        "parking_incentive_success_message": "",
+        "parking_banner_instructions": ""
+    },
+    "android_charger": {
+        "enable_mark_damage": true,
+        "require_bluetooth_on_capture": false,
+        "enable_improved_task_list": false,
+        "enable_tabbed_task_list": false,
+        "mark_damaged_copy_updates": false,
+        "enable_active_nearby_birds_sweep": false,
+        "block_bounty_map_on_task_limit_reached": false,
+        "enable_release_flow_v2_for_drops": false,
+        "enable_display_nest_radius": false,
+        "enable_report_multiple_birds_rider": false,
+        "enable_community_mode": false,
+        "enable_report_multiple_birds_charger": false
+    },
+    "mechanic_external_account_required": true,
+    "ios_storage_nest": {
+        "mech_storage_nest_intro": false,
+        "force_release_admin_approval": false,
+        "show_storage_nests": false
+    },
+    "service_center": {
+        "enable_repair_log": false
+    },
+    "enable_priority_collect_android": false,
+    "mech_scan_to_release": true,
+    "enable_report_bad_riding": false,
+    "enable_task_list_actions_v2_wont_power_on_action": false,
+    "hide_time_in_ride_history": false,
+    "enable_task_list_v2": true,
+    "use_billed_minutes_for_ride_time": false,
+    "nest_create_radius": 27.43,
+    "bird_watcher_distance_check": true,
+    "can_fix_qr": true,
+    "max_unlock_distance": 500,
+    "show_charge_task_limit": false,
+    "rider_tutorial": {
+        "parking": [
+            "parking_1"
         ],
         "contextual_m365": [
             "start_bird_m365",
@@ -414,155 +234,352 @@
             "safe_riding",
             "local_rule"
         ],
-        "parking": [
-            "parking_1"
+        "steps": [
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.9,
+                "body": "Find a Bird near you and tap the button to unlock.",
+                "title": "FIND & UNLOCK",
+                "file_name": "rt_find_and_unlock",
+                "id": "find_and_unlock",
+                "delay_loop_start": 5.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Stand on Bird, push-off, then push throttle button with thumb to ride.",
+                "title": "START BIRD",
+                "file_name": "rt_start_the_bird_m365",
+                "id": "start_bird_m365",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Stand on Bird, push-off, then push throttle button with thumb to ride.",
+                "title": "START BIRD",
+                "file_name": "rt_start_the_bird_es",
+                "id": "start_bird_es",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Place both feet on footboard while riding.",
+                "title": "FOOT PLACEMENT",
+                "file_name": "rt_foot_placement",
+                "id": "foot_placement",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Ride in bike lanes, no riding on sidewalks.",
+                "title": "WHERE TO RIDE",
+                "file_name": "rt_where_to_ride",
+                "id": "where_to_ride",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.8,
+                "body": "Squeeze brake with left hand to slow down.",
+                "title": "BRAKES",
+                "file_name": "rt_brakes_m365",
+                "id": "brakes_m365",
+                "delay_loop_start": 5.0,
+                "progress_loop_start": 0.2
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.8,
+                "body": "Squeeze brake with left hand to slow down.",
+                "title": "BRAKES",
+                "file_name": "rt_brakes_es",
+                "id": "brakes_es",
+                "delay_loop_start": 5.0,
+                "progress_loop_start": 0.2
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Don't block public pathways. Park by bike racks when available.",
+                "title": "PARKING",
+                "file_name": "rt_parking_1",
+                "id": "parking_1",
+                "delay_loop_start": 5.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.9,
+                "body": "Park on the street and obey parking rules, including street sweeping and painted curbs.",
+                "title": "PARKING",
+                "file_name": "rt_parking_2",
+                "id": "parking_2",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.29
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Park in metered spaces, in-between cars.",
+                "title": "PARKING",
+                "file_name": "rt_parking_3",
+                "id": "parking_3",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.25
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.8,
+                "body": "You can also park at the end of a car row, curb, or in designated motorcycle parking.",
+                "title": "PARKING",
+                "file_name": "rt_parking_4",
+                "id": "parking_4",
+                "delay_loop_start": 0.0,
+                "progress_loop_start": 0.18
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 0.8,
+                "body": "End your ride by tapping the button within the app.",
+                "title": "ENDING YOUR RIDE",
+                "file_name": "rt_ending_your_ride",
+                "id": "ending_you_ride",
+                "delay_loop_start": 5.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_end": 1.0,
+                "body": "Bring your own helmet to stay safe while you ride.",
+                "title": "SAFE RIDING",
+                "file_name": "rt_safe_riding",
+                "id": "safe_riding",
+                "loop_file_name": "rt_safe_riding_2",
+                "delay_loop_start": 1.0,
+                "progress_loop_start": 0.0
+            },
+            {
+                "progress_start": 0.0,
+                "progress_loop_start": 0.0,
+                "body": "\u00e2\u0080\u00a2 No underage riding\n\u00e2\u0080\u00a2 Follow the rules of the road\n\u00e2\u0080\u00a2 Stay safe - wear a helmet",
+                "title": "LOCAL RULES",
+                "progress_loop_end": 1.0,
+                "id": "local_rule",
+                "delay_loop_start": 0.0,
+                "subtitle": "\u223c"
+            }
+        ],
+        "all": [
+            "find_and_unlock",
+            "safe_riding",
+            "start_bird_m365",
+            "foot_placement",
+            "where_to_ride",
+            "brakes_m365",
+            "parking_1",
+            "ending_you_ride",
+            "local_rule"
         ]
     },
-    "charger_external_account_required": true,
-    "mechanic_external_account_required": true,
-    "nest_claim_duration_minutes": 30,
-    "show_charge_task_limit": false,
-    "enable_preferred_parking_v0": false,
-    "enforce_no_parking_v0": false,
-    "show_parking_nests": false,
-    "enable_multi_country_microblink_license_scanning": false,
-    "android_block_mock_location_providers": false,
-    "stp_billing_address_requirement": 0,
+    "disable_power_supplies": true,
+    "enable_configurable_contractor_onboarding": false,
+    "android_test_ride": {
+        "enabled": false
+    },
+    "use_microblink_id_scanner": true,
     "min_route_distance_rider": 0,
-    "google_pay_available": false,
-    "max_autoselect_distance_rider": 1,
+    "enable_capture_flow_v2_mechanic": true,
+    "charger_external_account_required": true,
+    "enable_improved_task_list": false,
+    "ios_min_version": "1.0.0",
     "min_autoselect_distance_rider": 0,
-    "local_config": {
-        "contractor_zone_radius": 1000.0,
-        "helmet_min_rides": 1,
-        "weather_alert": false,
-        "no_service_period": "12am - 4am",
-        "in_service": true,
-        "current_service_status": "IN_SERVICE",
-        "formatted_service_hours": "12am - 4am",
-        "name": "Santa Barbara - Isla Vista, East "
+    "automated_analytics": {
+        "roles": {
+            "rider": false,
+            "operator": false,
+            "bird_watcher": true,
+            "mechanic": false,
+            "charger": false
+        },
+        "enabled": true
     },
-    "local": {
-        "contractor_zone_radius": 1000.0,
-        "helmet_min_rides": 1,
-        "weather_alert": false,
-        "no_service_period": "12am - 4am",
-        "in_service": true,
-        "current_service_status": "IN_SERVICE",
-        "formatted_service_hours": "12am - 4am",
-        "name": "Santa Barbara - Isla Vista, East "
+    "android_mechanic": {
+        "enable_mark_damage": true,
+        "show_issues_to_mechs": false,
+        "enable_drop_map": false,
+        "enable_release_flow_v2": false
     },
-    "payment": {
-        "additional_fees": {
-            "apply_tax": false,
-            "fee_amount": 0
-        }
+    "android_gov_tech": {
+        "community_mode_max_photos_input": 5,
+        "enable_community_mode_v2": false
     },
-    "ride": {
-        "base_price": 100,
-        "minute_price": 20,
-        "included_minutes": 0,
-        "minimum_ride_price": 0,
-        "currency": "usd",
-        "maximum_free_ride_amount": 500,
-        "minimum_user_balance": -500,
-        "auto_pay_refill_amount": 0,
-        "auto_pay_use_fullscreen_flow": false,
-        "accept_provisional_id": true,
-        "auto_pay_incentive_amount": 0,
-        "auto_pay_prompt_first": false,
-        "auto_pay_start_after_ride_count": -1,
-        "auto_pay_nag_every_ride_count": 0,
-        "auto_pay_mandatory": false,
-        "auto_pay_mandatory_min_balance": 0,
-        "ios_rider_v2_enabled": false,
-        "ios_rider_v2_min_version": "4.17.0",
-        "price_change_exp_in_treatment_group": false
+    "test": {},
+    "scan_gun_storage_nest": {
+        "mech_storage_nest_intro": false,
+        "force_release_admin_approval": false,
+        "show_storage_nests": false
     },
-    "bounty": {
-        "currency": "usd",
-        "charger_power_supply_deposit_amount": 1000,
-        "bounty_filter_price_max": 2000,
-        "bounty_filter_price_step": 100
+    "show_price_change_notification_modal": false,
+    "enable_priority_collect_ios": false,
+    "enable_physical_lock_unlock": true,
+    "dynamic_agreements_for_riders": true,
+    "request_end_ride_photo": true,
+    "ios_test_ride": {
+        "enabled": false
     },
-    "delivery": {
-        "enabled": false,
-        "pay_as_you_go": true,
-        "cancellation_fee": 500,
-        "weekday_price": 0,
-        "weekend_price": 0,
-        "currency": "usd",
-        "release_window_start_hour": 3,
-        "release_window_end_hour": 7,
-        "release_window_end_hour_client": 6,
-        "locked_ride_end_hour": 10,
-        "force_ride_end_hour": 22,
-        "release_radius": 40.0,
-        "use_new_merged_delivery_screen": true,
-        "expire_routes_after_minutes": 45,
-        "enable_delivery_menu_item": false,
-        "ios_enable_charger_delivery": false,
-        "charger_can_schedule_delivery": true
+    "enable_community_mode": true,
+    "show_nest_release": true,
+    "show_physical_lock_last_compliant_modal": false,
+    "enable_due_time": true,
+    "android_beacon": {
+        "enable_passive_beacon_scans": false
     },
+    "microblink_license_key": "LBHMFKYW-QSSSOTE4-O5BN35VU-ADIABUAA-2AANAAGQ-ADIABUAA-2AANAAGQ-ADIHOQUZ",
+    "enable_admin_toggle_lifecycle": true,
     "fraud": {
-        "collect_card_zip": false,
+        "collect_card_billing_address": false,
         "collect_card_name": false,
-        "collect_card_billing_address": false
+        "collect_card_zip": false
+    },
+    "ios_beacon": {
+        "enable_passive_beacon_scans": false
+    },
+    "android_bird_watcher": {
+        "enable_new_repair_log_options": false,
+        "enable_birdwatcher_update_damage_status": true,
+        "enable_birdwatcher_bird_profile": true,
+        "inspection": {
+            "test_ride_enabled": false,
+            "enabled": false,
+            "max_photos": 4
+        },
+        "mark_damaged_options": {
+            "flat_tire": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
+            },
+            "other": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
+            },
+            "damaged_brain": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
+            },
+            "cut_wires": {
+                "marks_damage": false,
+                "enabled": true,
+                "sends_zendesk_ticket": false
+            }
+        },
+        "enable_birdwatcher_log_repairs": true,
+        "enable_birdwatcher_toolbox": true,
+        "enable_birdwatcher_report_missing_id": true,
+        "enable_birdwatcher_replace_qr": true,
+        "enable_birdwatcher_map_filter": false,
+        "enable_replace_physical_locks": false,
+        "enable_birdwatcher_report_large_pile": true
     },
     "tax_id": {
         "name": "SSN",
         "mask": "XXX-XX-XXXX"
+    },
+    "enable_zendesk_sdk": true,
+    "safety_menu_url": "http://www.bird.co/safety-first",
+    "google_pay_available": false,
+    "ios_charger_min_version": "3.1.9",
+    "limited_data_on_validate": false,
+    "operator_release_distance": 5000,
+    "release_start_hour": 4.0,
+    "cloudflare_sdk_enabled": true,
+    "android_parking": {
+        "enforced_no_parking_text": "",
+        "unenforced_no_parking_text": "",
+        "show_parking_nests": false,
+        "skip_photo_for_parking_incentives": false,
+        "parking_incentive_success_message": "",
+        "parking_banner_instructions": ""
+    },
+    "enable_dynamic_alerts": false,
+    "android_contractor": {
+        "enable_nest_map_v2": false
+    },
+    "banner": [
+        {
+            "message": "",
+            "kind": "unlock",
+            "notes": "",
+            "image_name": "bikeLane",
+            "key": "Don't ride on sidewalks",
+            "id": "7bcdcbcd-3b04-49f6-8235-5278bb548fd2",
+            "subtitle": "Please don't ride on sidewalks",
+            "updated_at": "2018-12-01T00:51:33.594976Z",
+            "created_at": "2018-09-25T22:23:44.793Z",
+            "title": "Friendly reminder, "
+        }
+    ],
+    "enforce_no_parking_v0": false,
+    "enable_physical_lock_replacement": false,
+    "test_feature": {
+        "android_min": "1.0.0",
+        "ios_min": "1.0.0"
     },
     "banner_config": {
         "banner_ids": [
             "7bcdcbcd-3b04-49f6-8235-5278bb548fd2"
         ]
     },
-    "banner": [
-        {
-            "id": "7bcdcbcd-3b04-49f6-8235-5278bb548fd2",
-            "title": "Friendly reminder, ",
-            "subtitle": "Please don't ride on sidewalks",
-            "message": "",
-            "image_name": "bikeLane",
-            "key": "Don't ride on sidewalks",
-            "updated_at": "2018-12-01T00:51:33.594976Z",
-            "created_at": "2018-09-25T22:23:44.793Z",
-            "kind": "unlock",
-            "notes": ""
-        }
-    ],
-    "enable_dynamic_alerts": false,
-    "enable_charger_snooze_release": false,
-    "test_feature": {
-        "android_min": "1.0.0",
-        "ios_min": "1.0.0"
+    "enable_new_charger_onboarding_intro": true,
+    "dynamic_agreements_for_contractors": true,
+    "android_damage_nest": {
+        "enable_rider_scan_modal": false,
+        "enable_charger_reserve_damage_drops": false,
+        "enable_headlight_toggle": false,
+        "enable_charger_damage_nest_intro": false,
+        "show_charger_damage_drops": false
     },
-    "ios_test_ride": {
-        "enabled": false
-    },
-    "android_test_ride": {
-        "enabled": false
-    },
-    "enable_physical_lock_replacement": false,
-    "blur_physical_lock_combination": false,
     "enable_physical_lock_photo_confirmation": false,
-    "enable_improved_task_list": false,
-    "android_beacon": {
-        "enable_passive_beacon_scans": false
+    "enable_give_free_rides": false,
+    "ios_charger": {
+        "enable_mark_damage": true,
+        "require_bluetooth_on_capture": false,
+        "enable_improved_task_list": false,
+        "enable_tabbed_task_list": false,
+        "mark_damaged_copy_updates": false,
+        "enable_active_nearby_birds_sweep": false,
+        "block_bounty_map_on_task_limit_reached": false,
+        "enable_release_flow_v2_for_drops": true,
+        "enable_display_nest_radius": false,
+        "enable_report_multiple_birds_rider": false,
+        "enable_community_mode": false,
+        "enable_report_multiple_birds_charger": false
     },
-    "ios_beacon": {
-        "enable_passive_beacon_scans": false
+    "become_charger_banner_copy": "",
+    "android_storage_nest": {
+        "mech_storage_nest_intro": false,
+        "force_release_admin_approval": false,
+        "show_storage_nests": false
     },
-    "android_gov_tech": {
-        "enable_community_mode_v2": false,
-        "community_mode_max_photos_input": 5
+    "nest_claim_duration_minutes": 30,
+    "force_charger_agreement_before": "2018-06-20T10:00:00+07:00",
+    "enable_capture_flow_v2_charger": true,
+    "ios_contractor": {
+        "enable_nest_map_v2": true
     },
-    "ios_gov_tech": {
-        "enable_community_mode_v2": false,
-        "community_mode_max_photos_input": 5
-    },
-    "show_price_change_notification_modal": true,
-    "enable_physical_lock_charger_release_message": false,
-    "test": {}
+    "max_autoselect_distance_rider": 1,
+    "enable_bounty_filter_charger": true,
+    "enable_task_list_actions_v2_wont_charge_action": false,
+    "stp_billing_address_requirement": 1,
+    "hide_missing_threshold": 2
 }

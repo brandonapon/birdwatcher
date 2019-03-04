@@ -22,6 +22,7 @@ def main():
         csv_writer.writerow(['id', 'latitude', 'longitude', 'battery_level', 'captive', 'time_stamp'])
         for dump in os.listdir(INPUT_DIR):
             if not dump.startswith('output'): 
+                # print(dump)
                 with open(INPUT_DIR + "/" + dump, "r") as read_file:
                     data = read_file.readlines()
                     output = json.loads(data[1])
