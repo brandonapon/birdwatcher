@@ -21,20 +21,24 @@ def main():
         csv_writer = csv.writer(write_file)
         csv_writer.writerow(['id', 'latitude', 'longitude', 'battery_level', 'captive', 'time_stamp'])
         for dump in os.listdir(INPUT_DIR):
-            if not dump.startswith('output'): 
-                with open(INPUT_DIR + "/" + dump, "r") as read_file:
-                    data = read_file.readlines()
-                    output = json.loads(data[1])
+            try:
+                if not dump.startswith('output'): 
+                    with open(INPUT_DIR + "/" + dump, "r") as read_file:
+                        data = read_file.readlines()
+                        output = json.loads(data[1])
 
-                    for item in output['birds']:
-                        csv_writer.writerow([
-                            item['id'], 
-                            item['location']['latitude'], 
-                            item['location']['longitude'],
-                            item['battery_level'],
-                            item['captive'],
-                            parse_filename_to_timestamp(dump)
-                        ])
+                        for item in output['birds']:
+                            csv_writer.writerow([
+                                item['id'], 
+                                item['location']['latitude'], 
+                                item['location']['longitude'],
+                                item['battery_level'],
+                                item['captive'],
+                                parse_filename_to_timestamp(dump)
+                            ])
+            except json.decoder.JSONDecodeError:
+                print("File {} malformed!!".format(dump))
+                continue
                         
 if __name__ == "__main__":
     main()
