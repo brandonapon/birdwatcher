@@ -105,16 +105,26 @@ def build_grid_count(points, init_list):
     return grid_count
 
 
-def analyze_activity(init_count, updated_list):
-    freq_grid = []
-    for i in range(len(init_count)):
-        freq_grid.append([])
-
-    for item in updated_list:
-        lat = float(item['latitude'])
-        lon = float(item['longitude'])
-        found = False
-
+def analyze_activity(freq_grid, prev_count, updated_count):
+    for line in range(len(updated_count)):
+        for item in range(len(updated_count[line])):
+            # import ipdb; ipdb.set_trace()
+            if len(updated_count[line][item]) == len(prev_count[line][item]):
+                continue
+                # prev_battery_level = 0
+                # updated_battery_level = 0
+                # for each in updated_count[line][item]:
+                #     updated_battery_level += each['battery_level']
+                # for each in prev_battery_level[line][item]:
+                #     prev_battery_level += each['battery_level'] 
+                # if abs(updated_battery_level - prev_battery_level) <= 2:
+                #     continue
+                # else:
+                #     freq_grid[line][item] = int(abs(updated_battery_level - prev_battery_level)/2)
+            else:
+                # import ipdb; ipdb.set_trace()
+                freq_grid[line][item] += abs(len(prev_count[line][item]) - len(updated_count[line][item]))
+    return freq_grid
 
 
 
@@ -123,6 +133,7 @@ def format_grid(grid):
         for line2 in line:
             print(len(line2), end=' ')
         print("\n")
+    print("\n")
 
 
 def main(analysis_type):
@@ -148,16 +159,39 @@ def main(analysis_type):
         init_count = build_grid_count(points, init_list)#to initialze the count of each area
         format_grid(init_count) 
         # print(last_timestamp)
-        resList = [] #to hold all the grids/grids_counts in this list
+        res_list = [] #to hold all the results
+        updated_grid = [] #to hold all the counts in each grid
+        freq_grid = [[0 for i in range(len(init_count))] for j in range(len(init_count))]
+        
         current_timestamp = init_timestamp
+        prev_count = init_count
+        
+
         while int(current_timestamp) < int(last_timestamp):
-            (updated_list,current_timestamp) = update_data(output_dir,current_timestamp, 3600) #to get an updated grid
-            resList.append(updated_list)
-        print(len(resList))
-        print(init_timestamp)
-        print(current_timestamp)
+            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 36000) #to get an updated grid
+            res_list.append(updated_list)
+            updated_count = build_grid_count(points, updated_list)#to update the count grid
+            # print(updated_count)
+            format_grid(updated_count)
+            
+            # compare with the previous grid counts
+            # import ipdb; ipdb.set_trace()
+            freq_grid = analyze_activity(freq_grid, prev_count, updated_count)
+            print(freq_grid)
+            # format_grid(updated_count)# to print out the grid 
+            # updated_grid.append(updated_count)
+            # format_grid(updated_count)
+        print(len(res_list))
+        print(len(updated_grid))
+        print(len(freq_grid))
+        # print(freq_grid)
+        # format_grid(updated_grid)
+        # print(updated_count)
+        # print(resList)
+        # print(init_timestamp)
+        # print(current_timestamp)
         # import ipdb; ipdb.set_trace()
-        # updated_count = build_grid_count(points, updated_list)
+       
         # format_grid(updated_count)
         # print(time)
         
