@@ -45,31 +45,42 @@ def divide(origin, x_end, y_end, cluster_len):
 def intialize_data(csv_file):
     with open(csv_file, "r") as read_file:
         data = csv.DictReader(read_file)
+        # import ipdb; ipdb.set_trace()
         init_list = []
+        first_data = False
+        init_timestamp = 0
+        last_timestamp = 0
         for line in data:
-            if line['id'] == 'id':
-                continue
             timestamp = line['time_stamp']
-            if timestamp == "1551441604":
+            last_timestamp = timestamp
+            if first_data == False:
+                init_timestamp = timestamp
+                first_data = True
+            if timestamp == init_timestamp:
                 init_list.append(line)
-    return init_list
+    return (init_list, init_timestamp, last_timestamp)
 
 
-def update_data(csv_file):
+def update_data(csv_file, prev_timestamp, time_interval):#time_interval is in seconds 
     with open(csv_file, "r") as read_file:
         data = csv.DictReader(read_file)
+        updated_prev_timestamp = 0
+        # found__updated_prev_timestamp = False
         updated_list = []
         for line in data:
-            if line['id'] == 'id':
-                continue
             timestamp = line['time_stamp']
-            if timestamp > "1551441604" and timestamp <= "1551474004":
-                updated_list.append(line)
-    return updated_list
+            updated_prev_timestamp = timestamp
+            if int(timestamp) <= int(prev_timestamp) + int(time_interval) - 120: #time_interval is in seconds 
+                continue
+            elif int(timestamp) > int(prev_timestamp) + int(time_interval) - 120 and int(timestamp) <= int(prev_timestamp) + int(time_interval) + 120:
+                updated_list.append(line) 
+            else:
+                break
+    return (updated_list, updated_prev_timestamp)
 
 
 
-def initialize_count(points, init_list):
+def build_grid_count(points, init_list):
     cluster_count = len(points)-1
     grid_count = [[] for i in range(cluster_count)]
     for i in range(cluster_count):
@@ -122,23 +133,35 @@ def main(analysis_type):
         x_end = geod.Direct(origin['lat2'], origin['lon2'], 90, 1.69e3)
         y_end = geod.Direct(origin['lat2'], origin['lon2'], 0, 1.69e3)
         #format_result(origin, x_end, y_end)
-        points = divide(origin, x_end, y_end, 0) #to get the over-estimated grid
+        points = divide(origin, x_end, y_end, 0) #to get the under-estimated grid
 
     elif analysis_type == "over":
         origin = geod.Direct(34.413112, -119.855395, 225, 1.69e3)
         x_end = geod.Direct(origin['lat2'], origin['lon2'], 90, 2.4e3)
         y_end = geod.Direct(origin['lat2'], origin['lon2'], 0, 2.4e3)
         #format_result(origin, x_end, y_end)
-        points = divide(origin, x_end, y_end, 600)
+        points = divide(origin, x_end, y_end, 600) #to get the over-estimated grid
         print(points)
-        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "csv_output.csv")
-        init_list = intialize_data(output_dir) #to get the first available data of each day(using 03/01 4am now)
+        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/2019_02_18.csv")
+        (init_list, init_timestamp, last_timestamp) = intialize_data(output_dir) #to get the first available data of each day(using 02/18)
         print(len(init_list))
-        init_count = initialize_count(points, init_list)#to initialze the count of each area
+        init_count = build_grid_count(points, init_list)#to initialze the count of each area
         format_grid(init_count) 
-        updated_list = update_data(output_dir) #to get the data from the rest of the day
-        #print(updated_list)
+        # print(last_timestamp)
+        resList = [] #to hold all the grids/grids_counts in this list
+        current_timestamp = init_timestamp
+        while int(current_timestamp) < int(last_timestamp):
+            (updated_list,current_timestamp) = update_data(output_dir,current_timestamp, 3600) #to get an updated grid
+            resList.append(updated_list)
+        print(len(resList))
+        print(init_timestamp)
+        print(current_timestamp)
+        # import ipdb; ipdb.set_trace()
+        # updated_count = build_grid_count(points, updated_list)
+        # format_grid(updated_count)
+        # print(time)
         
+
 
     
     else:
