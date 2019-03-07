@@ -110,17 +110,16 @@ def analyze_activity(freq_grid, prev_count, updated_count):
         for item in range(len(updated_count[line])):
             # import ipdb; ipdb.set_trace()
             if len(updated_count[line][item]) == len(prev_count[line][item]):
-                continue
-                # prev_battery_level = 0
-                # updated_battery_level = 0
-                # for each in updated_count[line][item]:
-                #     updated_battery_level += each['battery_level']
-                # for each in prev_battery_level[line][item]:
-                #     prev_battery_level += each['battery_level'] 
-                # if abs(updated_battery_level - prev_battery_level) <= 2:
-                #     continue
-                # else:
-                #     freq_grid[line][item] = int(abs(updated_battery_level - prev_battery_level)/2)
+                prev_battery_level = 0
+                updated_battery_level = 0
+                for each in updated_count[line][item]:
+                    updated_battery_level += int(each['battery_level'])
+                for each in prev_count[line][item]:
+                    prev_battery_level += int(each['battery_level'])
+                if abs(updated_battery_level - prev_battery_level) <= 2:
+                    continue
+                else:
+                    freq_grid[line][item] += int(abs(updated_battery_level - prev_battery_level)/2)
             else:
                 # import ipdb; ipdb.set_trace()
                 freq_grid[line][item] += abs(len(prev_count[line][item]) - len(updated_count[line][item]))
@@ -169,7 +168,7 @@ def main(analysis_type):
         
 
         while int(current_timestamp) < int(last_timestamp):
-            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 36000) #to get an updated grid
+            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 3600) #to get an updated grid
             res_list.append(updated_list)
             updated_count = build_grid_count(points, updated_list)#to update the count grid
             # print(updated_count)
