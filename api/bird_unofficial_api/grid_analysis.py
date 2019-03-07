@@ -157,6 +157,7 @@ def main(analysis_type):
         (init_list, init_timestamp, last_timestamp) = intialize_data(output_dir) #to get the first available data of each day(using 02/18)
         print(len(init_list))
         init_count = build_grid_count(points, init_list)#to initialze the count of each area
+        print("The initial board is")
         format_grid(init_count) 
         # print(last_timestamp)
         res_list = [] #to hold all the results
@@ -172,19 +173,20 @@ def main(analysis_type):
             res_list.append(updated_list)
             updated_count = build_grid_count(points, updated_list)#to update the count grid
             # print(updated_count)
+            print("The updated board is")
             format_grid(updated_count)
             
             # compare with the previous grid counts
             # import ipdb; ipdb.set_trace()
             freq_grid = analyze_activity(freq_grid, prev_count, updated_count)
-            print(freq_grid)
+            prev_count = updated_count
             # format_grid(updated_count)# to print out the grid 
             # updated_grid.append(updated_count)
             # format_grid(updated_count)
-        print(len(res_list))
-        print(len(updated_grid))
-        print(len(freq_grid))
-        # print(freq_grid)
+        # print(len(res_list))
+        # print(len(updated_grid))
+        # print(len(freq_grid))
+        print(freq_grid)
         # format_grid(updated_grid)
         # print(updated_count)
         # print(resList)
