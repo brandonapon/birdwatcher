@@ -20,6 +20,7 @@ class Mapping:
         self.opacity = 1
         self.show = True
         self.max_val = 0
+        self.total_frames = 0
 
     def import_data(self, filename):
         pass
@@ -109,12 +110,13 @@ class Mapping:
         self.side_length = side_length
         self.grid_obj_list = grid_obj_list
         self.opacity = opacity
+        self.total_frames = len(grid_obj_list)
         for grid_list in grid_obj_list:
             if self.max_val < max(grid_list[0]):
                 self.max_val = max(grid_list[0])
 
     def generate_grid_plot_update(self, frame):
-        print("Frame: {}".format(frame))
+        print("Frame: {}/{}".format(frame+1, self.total_frames))
         print('side: {}, grid: {}, opacity: {}'.format(self.side_length, self.grid_obj_list[frame], self.opacity))
         self.generate_grid_plot(self.side_length, self.grid_obj_list[frame], self.opacity)
 
