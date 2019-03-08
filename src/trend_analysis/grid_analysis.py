@@ -171,7 +171,7 @@ def main(analysis_type):
         print("The initial board is")
         format_grid(init_count) 
         # print(last_timestamp)
-        res_list = [] #to hold all the results
+        res_list = [] #to hold all the results for GIF purpose
         updated_grid = [] #to hold all the counts in each grid
         freq_grid = [[0 for i in range(len(init_count))] for j in range(len(init_count))]
         
@@ -187,8 +187,11 @@ def main(analysis_type):
             print("The updated board is")
             format_grid(updated_count)
 
-            rows = take_count(updated_count)
-            
+            rows = take_count(updated_count) # save the count in the grid 
+            rows = concat_rows(rows) # concat rows of grid
+            res_list.append((rows, current_timestamp))
+
+
             # compare with the previous grid counts
             # import ipdb; ipdb.set_trace()
             freq_grid = analyze_activity(freq_grid, prev_count, updated_count)
@@ -215,9 +218,8 @@ def main(analysis_type):
 
         ##############Start Plotting##############
         base_map = map_plotting.Mapping()
-        final_list = concat_rows(freq_grid)
-        base_map.generate_grid_plot(16, final_list, 0.5, 'val', True)
-
+        # base_map.generate_grid_plot(16, final_list, 0.5, 'val', True)
+        base_map.generate_grid_gif(len(points)-1, res_list, 0.75)
 
     
     else:
