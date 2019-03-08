@@ -20,7 +20,6 @@ class Mapping:
         self.opacity = 1
         self.show = True
         self.max_val = 0
-        self.timestamp = None
 
     def import_data(self, filename):
         pass
@@ -58,6 +57,7 @@ class Mapping:
             grid_list_list.append([val for i in range(spacing)])
         # create duplicating row
         for j in range(side_length):
+            print('{}% complete'.format((j/side_length)*100))
             # print('j = {}'.format(j))
             row = []
             for i in range(side_length):
@@ -70,9 +70,10 @@ class Mapping:
                     final_array_grid = np.array(row)
                 else:
                     final_array_grid = np.vstack((final_array_grid, np.array(row)))
+        print('100% complete')
         plt.imshow(final_array_grid, alpha = opacity, cmap=plt.get_cmap('Reds'))
-        # plt.clim(vmin = 0, vmax = self.max_val)
         if len(plt.gcf().axes) == 1: 
+            plt.clim(vmin = 0, vmax = self.max_val)
             plt.colorbar()
         print('Color Grid Generation Complete!')
         # major_ticks = np.arange(0, PIXEL_LENGTH, spacing)
@@ -93,45 +94,44 @@ class Mapping:
     def generate_bird_plot_gif(self):
         pass
 
-    def generate_grid_plot(self, side_length, grid_list, opacity, timestamp, show=False):
+    def generate_grid_plot(self, side_length, grid_obj, opacity, show=False):
         print('Starting Plot...')
         self.register_api_key()
         self.generate_base_map()
-        self.generate_color_grid(side_length, grid_list, opacity)
-        plt.title(timestamp)
+        self.generate_color_grid(side_length, grid_obj[0], opacity)
+        plt.title(grid_obj[1])
         if show == True:
             plt.show()
         print('Plotting Complete!')
 
-    def initialize_grid(self, side_length, grid_list_list, opacity, timestamp):
+    def initialize_grid(self, side_length, grid_obj_list, opacity):
         print('Init Grid Vals')
         self.side_length = side_length
-        self.grid_list_list = grid_list_list
+        self.grid_obj_list = grid_obj_list
         self.opacity = opacity
-        self.timestamp = timestamp
-        for grid_list in grid_list_list:
-            if self.max_val < max(grid_list):
-                self.max_val = max(grid_list)
+        for grid_list in grid_obj_list:
+            if self.max_val < max(grid_list[0]):
+                self.max_val = max(grid_list[0])
 
     def generate_grid_plot_update(self, frame):
         print("Frame: {}".format(frame))
-        print('side: {}, grid: {}, opacity: {}'.format(self.side_length, self.grid_list_list[frame], self.opacity))
-        self.generate_grid_plot(self.side_length, self.grid_list_list[frame], self.opacity, self.timestamp)
+        print('side: {}, grid: {}, opacity: {}'.format(self.side_length, self.grid_obj_list[frame], self.opacity))
+        self.generate_grid_plot(self.side_length, self.grid_obj_list[frame], self.opacity)
 
     # Type: activity/heatmap vs density
-    def generate_grid_gif(self, side_length, grid_list_list, opacity, timestamp, show=False):
-        print('Num Frames: {}'.format(len(grid_list_list)))
-        self.initialize_grid(side_length, grid_list_list, opacity, timestamp)
+    def generate_grid_gif(self, side_length, grid_obj_list, opacity, show=False):
+        print('Num Frames: {}'.format(len(grid_obj_list)))
+        self.initialize_grid(side_length, grid_obj_list, opacity)
         fig = plt.figure()
         dpi = fig.get_dpi()
-        anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_list_list)), init_func = self.init_background, interval=500)
+        anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_obj_list)), init_func = self.init_background, interval=500)
         anim.save('../../images/line.gif', dpi=dpi, writer='imagemagick')
         if show == True:
             plt.show()
 
 if __name__ == "__main__":
     base_map = Mapping()
-    grid_list_list = [[1,2,6,1,0,4,8,1,0,1,2,1,0,8,1,1],
-                    [1,2,6,1,0,4,0,1,0,1,2,1,0,0,1,1]]
+    grid_obj_list = [([1,2,6,1,0,4,8,1,0,1,2,1,0,8,1,1], 'time1'),
+                    ([1,2,6,1,0,4,0,1,0,1,2,1,10,0,1,1], 'time2')]
     # base_map.generate_grid_plot(4, grid_list_list[0], 0.5)
-    base_map.generate_grid_gif(4, grid_list_list, 0.75)
+    base_map.generate_grid_gif(4, grid_obj_list, 0.75)
