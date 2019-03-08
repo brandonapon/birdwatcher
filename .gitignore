@@ -107,3 +107,4 @@ venv.bak/
 
 # venv directories
 bird_api-venv/
+.vscode/
