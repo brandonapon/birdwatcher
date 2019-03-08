@@ -67,7 +67,7 @@ class Mapping:
                 else:
                     final_array_grid = np.vstack((final_array_grid, np.array(row)))
         plt.imshow(final_array_grid, alpha = opacity, cmap=plt.get_cmap('Reds'))
-        plt.clim(vmin = 0, vmax = self.max_val)
+        # plt.clim(vmin = 0, vmax = self.max_val)
         if len(plt.gcf().axes) == 1: 
             plt.colorbar()
         # major_ticks = np.arange(0, PIXEL_LENGTH, spacing)
@@ -124,4 +124,4 @@ if __name__ == "__main__":
     grid_list_list = [[1,2,6,1,0,4,8,1,0,1,2,1,0,8,1,1],
                     [1,2,6,1,0,4,0,1,0,1,2,1,0,0,1,1]]
     # base_map.generate_grid_plot(4, grid_list_list[0], 0.5)
-    base_map.generate_grid_gif(4, grid_list_list, 0.5)
+    base_map.generate_grid_gif(4, grid_list_list, 0.75)
