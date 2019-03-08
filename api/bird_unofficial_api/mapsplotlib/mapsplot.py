@@ -50,8 +50,7 @@ def background_and_pixels(latitudes, longitudes, size, maptype):
     # From lat/long to pixels, zoom and position in the tile
     center_lat = (latitudes.max() + latitudes.min()) / 2
     center_long = (longitudes.max() + longitudes.min()) / 2
-    # zoom = GoogleStaticMapsAPI.get_zoom(latitudes, longitudes, size, SCALE)
-    zoom = 15
+    zoom = GoogleStaticMapsAPI.get_zoom(latitudes, longitudes, size, SCALE)
     pixels = GoogleStaticMapsAPI.to_tile_coordinates(latitudes, longitudes, center_lat, center_long, zoom, size, SCALE)
     # Google Map
     img = GoogleStaticMapsAPI.map(
@@ -61,33 +60,6 @@ def background_and_pixels(latitudes, longitudes, size, maptype):
         size=(size, size),
         maptype=maptype,
     )
-    # print("zoom = {}".format(zoom))
-    return img, pixels
-
-def background_and_pixels_zoom(latitudes, longitudes, size, maptype, zoom):
-    """Queries the proper background map and translate geo coordinated into pixel locations on this map.
-
-    :param pandas.Series latitudes: series of sample latitudes
-    :param pandas.Series longitudes: series of sample longitudes
-    :param int size: target size of the map, in pixels
-    :param string maptype: type of maps, see GoogleStaticMapsAPI docs for more info
-
-    :return: map and pixels
-    :rtype: (PIL.Image, pandas.DataFrame)
-    """
-    # From lat/long to pixels, zoom and position in the tile
-    center_lat = (latitudes.max() + latitudes.min()) / 2
-    center_long = (longitudes.max() + longitudes.min()) / 2
-    pixels = GoogleStaticMapsAPI.to_tile_coordinates(latitudes, longitudes, center_lat, center_long, zoom, size, SCALE)
-    # Google Map
-    img = GoogleStaticMapsAPI.map(
-        center=(center_lat, center_long),
-        zoom=zoom,
-        scale=SCALE,
-        size=(size, size),
-        maptype=maptype,
-    )
-    # print("zoom = {}".format(zoom))
     return img, pixels
 
 
@@ -133,11 +105,8 @@ def plot_markers(markers, maptype=MAPTYPE):
     :return: None
     """
     # Checking input columns
-    print('Function called....')
     fields = markers.columns.intersection(['latitude', 'longitude', 'color', 'label', 'size'])
-    print(fields)
-    if 'latitude' not in fields or 'longitude' not in fields:
-        print('Got here...')
+    if not fields or 'latitude' not in fields or 'longitude' not in fields:
         msg = 'Input dataframe should contain at least colums \'latitude\' and \'longitude\' '
         msg += '(and columns \'color\', \'label\', \'size\' optionally).'
         raise KeyError(msg)
@@ -181,7 +150,7 @@ def heatmap(latitudes, longitudes, values, resolution=None, maptype=MAPTYPE):
     plt.figure(figsize=(10, 10))
     plt.imshow(np.array(img))                                               # Background map
     plt.imshow(z, origin='lower', extent=[0, width, 0, width], alpha=0.15)  # Foreground, transparent heatmap
-    plt.scatter(pixels['x_pixel'], pixels['y_pixel'], s=1)                  # Markers of all points
+    plt.scatter(pixels['x_pixel'], pixels['y_pixel'], s=3, c='purple')                  # Markers of all points
     plt.gca().invert_yaxis()                                                # Origin of map is upper left
     plt.axis([0, width, width, 0])                                          # Remove margin
     plt.axis('off')
