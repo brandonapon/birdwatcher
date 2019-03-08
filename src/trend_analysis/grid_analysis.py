@@ -7,8 +7,7 @@ import sys
 import os
 import csv
 import copy
-
-
+import map_plotting
 
 def usage():
     print("grid_analysis.py <analysis_type>")
