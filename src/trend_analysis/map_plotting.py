@@ -13,7 +13,6 @@ MAX_SIZE = 640
 PIXEL_LENGTH = 1280
 
 class Mapping:
-    # ! TODO: initialization variables
     def __init__(self):
         self.base_map = None
         self.side_length = 0
@@ -21,6 +20,7 @@ class Mapping:
         self.opacity = 1
         self.show = True
         self.max_val = 0
+        self.timestamp = None
 
     def import_data(self, filename):
         pass
@@ -31,11 +31,13 @@ class Mapping:
     
     def generate_base_map(self, coordinate_tuple=(34.413112,-119.855395), size = MAX_SIZE, zoom=15, maptype='roadmap'):
         # testing locked background map
+        print("Generating Base Map...")
         coordinate_dict = {'latitudes': [coordinate_tuple[0]], 'longitudes': [coordinate_tuple[1]]}
         coordinate_df = pd.DataFrame(coordinate_dict)
         img, pixels = mplt.background_and_pixels_zoom(coordinate_df['latitudes'], coordinate_df['longitudes'], MAX_SIZE, maptype, zoom)
         # plt.figure(figsize=(15, 15))
         plt.imshow(np.array(img))
+        print('Base Map Generation Complete!')
         # major_ticks = np.arange(0, 1280, 320)
         # ax.set_xticks(major_ticks)
         # ax.set_yticks(major_ticks)
@@ -45,7 +47,9 @@ class Mapping:
 
     # This makes the assumption that the list a representation of the list as if reading it L->R, Top to Bottom
     def generate_color_grid(self, side_length, grid_list, opacity):
+        print("Generating Color Grid...")
         if side_length*side_length != len(grid_list):
+            print("MISMATCH: BOXES TO PROVIDED GRID")
             return
         spacing = int(PIXEL_LENGTH/side_length)
         final_array_grid = np.array([])
@@ -70,6 +74,7 @@ class Mapping:
         # plt.clim(vmin = 0, vmax = self.max_val)
         if len(plt.gcf().axes) == 1: 
             plt.colorbar()
+        print('Color Grid Generation Complete!')
         # major_ticks = np.arange(0, PIXEL_LENGTH, spacing)
         # ax = plt.axes()
         # ax.set_xticks(major_ticks)
@@ -88,17 +93,22 @@ class Mapping:
     def generate_bird_plot_gif(self):
         pass
 
-    def generate_grid_plot(self, side_length, grid_list, opacity, show=False):
+    def generate_grid_plot(self, side_length, grid_list, opacity, timestamp, show=False):
+        print('Starting Plot...')
         self.register_api_key()
         self.generate_base_map()
         self.generate_color_grid(side_length, grid_list, opacity)
+        plt.title(timestamp)
         if show == True:
             plt.show()
+        print('Plotting Complete!')
 
-    def initialize_grid(self, side_length, grid_list_list, opacity):
+    def initialize_grid(self, side_length, grid_list_list, opacity, timestamp):
+        print('Init Grid Vals')
         self.side_length = side_length
         self.grid_list_list = grid_list_list
         self.opacity = opacity
+        self.timestamp = timestamp
         for grid_list in grid_list_list:
             if self.max_val < max(grid_list):
                 self.max_val = max(grid_list)
@@ -106,12 +116,12 @@ class Mapping:
     def generate_grid_plot_update(self, frame):
         print("Frame: {}".format(frame))
         print('side: {}, grid: {}, opacity: {}'.format(self.side_length, self.grid_list_list[frame], self.opacity))
-        self.generate_grid_plot(self.side_length, self.grid_list_list[frame], self.opacity)
+        self.generate_grid_plot(self.side_length, self.grid_list_list[frame], self.opacity, self.timestamp)
 
     # Type: activity/heatmap vs density
-    def generate_grid_gif(self, side_length, grid_list_list, opacity, show=False):
+    def generate_grid_gif(self, side_length, grid_list_list, opacity, timestamp, show=False):
         print('Num Frames: {}'.format(len(grid_list_list)))
-        self.initialize_grid(side_length, grid_list_list, opacity)
+        self.initialize_grid(side_length, grid_list_list, opacity, timestamp)
         fig = plt.figure()
         dpi = fig.get_dpi()
         anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_list_list)), init_func = self.init_background, interval=500)

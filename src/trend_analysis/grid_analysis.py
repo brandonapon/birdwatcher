@@ -155,7 +155,7 @@ def main(analysis_type):
         x_end = geod.Direct(origin['lat2'], origin['lon2'], 90, 2.4e3)
         y_end = geod.Direct(origin['lat2'], origin['lon2'], 0, 2.4e3)
         #format_result(origin, x_end, y_end)
-        points = divide(origin, x_end, y_end, 120) #to get the over-estimated grid
+        points = divide(origin, x_end, y_end, 150) #to get the over-estimated grid
         print(points)
         output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/2019_02_19.csv")
         (init_list, init_timestamp, last_timestamp) = intialize_data(output_dir) #to get the first available data of each day(using 02/18)
@@ -207,7 +207,7 @@ def main(analysis_type):
         ##############Start Plotting##############
         base_map = map_plotting.Mapping()
         final_list = concat_rows(freq_grid)
-        base_map.generate_grid_plot(20, final_list, 0.5, True)
+        base_map.generate_grid_plot(16, final_list, 0.5, 'val', True)
 
 
     
