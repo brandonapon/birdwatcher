@@ -142,7 +142,7 @@ def concat_rows(rows):
 
 def take_count(list_count):
     rows = [[0 for i in range(len(list_count))] for j in range(len(list_count))]
-    for l_index, line in enumeration(list_count):
+    for l_index, line in enumerate(list_count):
         for i_index, item in enumerate(line):
             rows[l_index][i_index] = len(item)
     return rows
@@ -181,14 +181,16 @@ def main(analysis_type):
 
         while int(current_timestamp) < int(last_timestamp):
             (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 36000) #to get an updated grid
-            res_list.append(updated_list)
+            # res_list.append(updated_list)
             updated_count = build_grid_count(points, updated_list)#to update the count grid
             # print(updated_count)
             print("The updated board is")
             format_grid(updated_count)
 
             rows = take_count(updated_count) # save the count in the grid 
+            print('rows: {}'.format(rows))
             rows = concat_rows(rows) # concat rows of grid
+            print('concat_rows: {}'.format(rows))
             res_list.append((rows, current_timestamp))
 
 
@@ -203,6 +205,7 @@ def main(analysis_type):
         # print(len(updated_grid))
         # print(len(freq_grid))
         print(freq_grid)
+        print('res_list: {}'.format(res_list))
         # format_grid(updated_grid)
         # print(updated_count)
         # print(resList)
@@ -219,7 +222,7 @@ def main(analysis_type):
         ##############Start Plotting##############
         base_map = map_plotting.Mapping()
         # base_map.generate_grid_plot(16, final_list, 0.5, 'val', True)
-        base_map.generate_grid_gif(len(points)-1, res_list, 0.75)
+        base_map.generate_grid_gif('sydney',len(points)-1, res_list, 0.75)
 
     
     else:

@@ -111,9 +111,10 @@ class Mapping:
         self.grid_obj_list = grid_obj_list
         self.opacity = opacity
         self.total_frames = len(grid_obj_list)
-        for grid_list in grid_obj_list:
-            if self.max_val < max(grid_list[0]):
-                self.max_val = max(grid_list[0])
+        for grid_obj in grid_obj_list:
+            print(grid_obj[0])
+            if self.max_val < max(grid_obj[0]):
+                self.max_val = max(grid_obj[0])
 
     def generate_grid_plot_update(self, frame):
         print("Frame: {}/{}".format(frame+1, self.total_frames))
@@ -121,13 +122,13 @@ class Mapping:
         self.generate_grid_plot(self.side_length, self.grid_obj_list[frame], self.opacity)
 
     # Type: activity/heatmap vs density
-    def generate_grid_gif(self, side_length, grid_obj_list, opacity, show=False):
+    def generate_grid_gif(self, filename, side_length, grid_obj_list, opacity, show=False):
         print('Num Frames: {}'.format(len(grid_obj_list)))
         self.initialize_grid(side_length, grid_obj_list, opacity)
         fig = plt.figure()
         dpi = fig.get_dpi()
         anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_obj_list)), init_func = self.init_background, interval=500)
-        anim.save('../../images/line.gif', dpi=dpi, writer='imagemagick')
+        anim.save('../../images/{}.gif'.format(filename), dpi=dpi, writer='imagemagick')
         if show == True:
             plt.show()
 
