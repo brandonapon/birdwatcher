@@ -140,6 +140,13 @@ def concat_rows(rows):
         final_list = final_list + row
     return final_list
 
+def take_count(list_count):
+    rows = [[0 for i in range(len(list_count))] for j in range(len(list_count))]
+    for l_index, line in enumeration(list_count):
+        for i_index, item in enumerate(line):
+            rows[l_index][i_index] = len(item)
+    return rows
+
 def main(analysis_type):
     geod = Geodesic.WGS84  # define the WGS84 ellipsoid
     # An over estimation
@@ -179,6 +186,8 @@ def main(analysis_type):
             # print(updated_count)
             print("The updated board is")
             format_grid(updated_count)
+
+            rows = take_count(updated_count)
             
             # compare with the previous grid counts
             # import ipdb; ipdb.set_trace()
