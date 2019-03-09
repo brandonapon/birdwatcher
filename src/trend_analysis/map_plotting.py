@@ -102,6 +102,8 @@ class Mapping:
         print('Starting Plot...')
         self.register_api_key()
         self.generate_base_map()
+        self.max_val = max(grid_obj[0])
+        print('max = {}'.format(self.max_val))
         self.generate_color_grid(side_length, grid_obj[0], opacity)
         plt.title(datetime.fromtimestamp(int(grid_obj[1])))
         if show == True:
