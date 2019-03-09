@@ -8,6 +8,9 @@ import os
 import csv
 import copy
 import map_plotting
+from datetime import datetime, timedelta
+import pandas as pd
+
 
 def usage():
     print("grid_analysis.py <analysis_type>")
@@ -68,15 +71,17 @@ def update_data(csv_file, prev_timestamp, time_interval):#time_interval is in se
         updated_list = []
         for line in data:
             timestamp = line['time_stamp']
-            updated_prev_timestamp = timestamp
+            prev_timestamp_low = int(prev_timestamp) + int(time_interval) - 120
+            prev_timestamp_high = int(prev_timestamp) + int(time_interval) + 120
+            # print('{} cmp {} - {}'.format(datetime.fromtimestamp(int(timestamp)), datetime.fromtimestamp(prev_timestamp_low), datetime.fromtimestamp(prev_timestamp_high)))
             if int(timestamp) <= int(prev_timestamp) + int(time_interval) - 120: #time_interval is in seconds 
                 continue
-            elif int(timestamp) > int(prev_timestamp) + int(time_interval) - 120 and int(timestamp) <= int(prev_timestamp) + int(time_interval) + 120:
+            elif int(timestamp) > prev_timestamp_low and int(timestamp) <= prev_timestamp_high:
+                updated_prev_timestamp = timestamp 
                 updated_list.append(line) 
             else:
                 break
     return (updated_list, updated_prev_timestamp)
-
 
 
 def build_grid_count(points, init_list):
@@ -147,6 +152,15 @@ def take_count(list_count):
             rows[l_index][i_index] = len(item)
     return rows
 
+# * New pandas based analysis of timestamp
+def return_unique_timestamps(filename):
+    filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/{}.csv".format(filename))
+    day_df = pd.read_csv(filepath)
+    day_df['datetime'] = day_df['time_stamp'].apply(lambda x: datetime.datetime.fromtimestamp(x).time())
+    print(day_df['datetime'].unique())
+
+TIME_SPACING = 3600
+
 def main(analysis_type):
     geod = Geodesic.WGS84  # define the WGS84 ellipsoid
     # An over estimation
@@ -178,9 +192,13 @@ def main(analysis_type):
         current_timestamp = init_timestamp
         prev_count = init_count
         
-
+        timestamp_list = []
         while int(current_timestamp) < int(last_timestamp):
-            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 36000) #to get an updated grid
+            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, TIME_SPACING) #to get an updated grid
+            if current_timestamp == 0:
+                break
+            # ! saving timestamps in order of selection
+            timestamp_list.append(current_timestamp)
             # res_list.append(updated_list)
             updated_count = build_grid_count(points, updated_list)#to update the count grid
             # print(updated_count)
@@ -224,7 +242,11 @@ def main(analysis_type):
         # base_map.generate_grid_plot(len(points)-1, (concat_rows(freq_grid),'1'), 0.5, True)
         print(res_list[0])
         # base_map.generate_grid_plot(len(points)-1, res_list[0], 0.5, True)
-        base_map.generate_grid_gif('saurabh',len(points)-1, res_list, 0.75)
+        base_map.generate_grid_gif('date',len(points)-1, res_list, 0.75)
+        # ! Printing collected timestamps
+        # for timestamp in timestamp_list:
+        #     print(datetime.fromtimestamp(int(timestamp)))
+        # print(return_unique_timestamps('2019_02_13'))
 
     
     else:

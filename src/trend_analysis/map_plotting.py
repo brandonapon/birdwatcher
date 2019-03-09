@@ -41,6 +41,7 @@ class Mapping:
         img, pixels = mplt.background_and_pixels_zoom(coordinate_df['latitudes'], coordinate_df['longitudes'], MAX_SIZE, maptype, zoom)
         # plt.figure(figsize=(15, 15))
         plt.imshow(np.array(img))
+        self.base_map = img
         print('Base Map Generation Complete!')
         # major_ticks = np.arange(0, 1280, 320)
         # ax.set_xticks(major_ticks)
@@ -103,7 +104,11 @@ class Mapping:
     def generate_grid_plot(self, side_length, grid_obj, opacity, show=False):
         print('Starting Plot...')
         self.register_api_key()
-        self.generate_base_map()
+        if self.base_map != None:
+            print('Using prev rendered map')
+            plt.imshow(np.array(self.base_map))
+        else:
+            self.generate_base_map()
         self.max_val = max(grid_obj[0])
         # print('max = {}'.format(self.max_val))
         self.generate_color_grid(side_length, grid_obj[0], opacity)
@@ -124,6 +129,7 @@ class Mapping:
                 self.max_val = max(grid_obj[0])
 
     def generate_grid_plot_update(self, frame):
+        print('################################################')
         print("Frame: {}/{}".format(frame+1, self.total_frames))
         print('side: {}, grid: {}, opacity: {}'.format(self.side_length, self.grid_obj_list[frame], self.opacity))
         self.generate_grid_plot(self.side_length, self.grid_obj_list[frame], self.opacity)
