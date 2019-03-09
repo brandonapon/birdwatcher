@@ -8,6 +8,8 @@ from math import sin, cos, sqrt, atan2
 from mapsplotlib import mapsplot as mplt
 from matplotlib import colors
 from matplotlib.animation import FuncAnimation
+from datetime import datetime
+import time
 
 MAX_SIZE = 640
 PIXEL_LENGTH = 1280
@@ -100,7 +102,7 @@ class Mapping:
         self.register_api_key()
         self.generate_base_map()
         self.generate_color_grid(side_length, grid_obj[0], opacity)
-        plt.title(grid_obj[1])
+        plt.title(datetime.fromtimestamp(int(grid_obj[1])))
         if show == True:
             plt.show()
         print('Plotting Complete!')
@@ -126,8 +128,10 @@ class Mapping:
         print('Num Frames: {}'.format(len(grid_obj_list)))
         self.initialize_grid(side_length, grid_obj_list, opacity)
         fig = plt.figure()
-        dpi = fig.get_dpi()
-        anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_obj_list)), init_func = self.init_background, interval=500)
+        # dpi = fig.get_dpi()
+        dpi = 200
+        # print(dpi)
+        anim = FuncAnimation(fig, self.generate_grid_plot_update, frames=np.arange(0, len(grid_obj_list)), init_func = self.init_background, interval=2000)
         anim.save('../../images/{}.gif'.format(filename), dpi=dpi, writer='imagemagick')
         if show == True:
             plt.show()

@@ -164,7 +164,7 @@ def main(analysis_type):
         #format_result(origin, x_end, y_end)
         points = divide(origin, x_end, y_end, 150) #to get the over-estimated grid
         print(points)
-        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/2019_02_19.csv")
+        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/2019_02_13.csv")
         (init_list, init_timestamp, last_timestamp) = intialize_data(output_dir) #to get the first available data of each day(using 02/18)
         print(len(init_list))
         init_count = build_grid_count(points, init_list)#to initialze the count of each area
@@ -180,7 +180,7 @@ def main(analysis_type):
         
 
         while int(current_timestamp) < int(last_timestamp):
-            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 36000) #to get an updated grid
+            (updated_list,current_timestamp) = update_data(output_dir, current_timestamp, 3600) #to get an updated grid
             # res_list.append(updated_list)
             updated_count = build_grid_count(points, updated_list)#to update the count grid
             # print(updated_count)
@@ -222,7 +222,7 @@ def main(analysis_type):
         ##############Start Plotting##############
         base_map = map_plotting.Mapping()
         # base_map.generate_grid_plot(16, final_list, 0.5, 'val', True)
-        base_map.generate_grid_gif('sydney',len(points)-1, res_list, 0.75)
+        base_map.generate_grid_gif('saurabh',len(points)-1, res_list, 0.75)
 
     
     else:
