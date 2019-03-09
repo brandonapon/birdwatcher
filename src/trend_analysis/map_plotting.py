@@ -31,7 +31,7 @@ class Mapping:
         # register api key
         mplt.register_api_key('AIzaSyBmjHKY0e0z090bBg4-qXFpKW4XbdBr2RM')
     
-    def generate_base_map(self, coordinate_tuple=(34.413112,-119.855395), size = MAX_SIZE, zoom=15, maptype='roadmap'):
+    def generate_base_map(self, coordinate_tuple=(34.412446,-119.855400), size = MAX_SIZE, zoom=15, maptype='roadmap'):
         # testing locked background map
         print("Generating Base Map...")
         coordinate_dict = {'latitudes': [coordinate_tuple[0]], 'longitudes': [coordinate_tuple[1]]}
@@ -52,6 +52,7 @@ class Mapping:
         print("Generating Color Grid...")
         if side_length*side_length != len(grid_list):
             print("MISMATCH: BOXES TO PROVIDED GRID")
+            print('side_length = {} \ngrid_list = {}'.format(side_length, grid_list))
             return
         spacing = int(PIXEL_LENGTH/side_length)
         final_array_grid = np.array([])
