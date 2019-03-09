@@ -10,9 +10,11 @@ from matplotlib import colors
 from matplotlib.animation import FuncAnimation
 from datetime import datetime
 import time
+from mapsplotlib.google_static_maps_api import GoogleStaticMapsAPI
 
-MAX_SIZE = 640
-PIXEL_LENGTH = 1280
+
+MAX_SIZE = 600
+PIXEL_LENGTH = 1200
 
 class Mapping:
     def __init__(self):
@@ -103,7 +105,7 @@ class Mapping:
         self.register_api_key()
         self.generate_base_map()
         self.max_val = max(grid_obj[0])
-        print('max = {}'.format(self.max_val))
+        # print('max = {}'.format(self.max_val))
         self.generate_color_grid(side_length, grid_obj[0], opacity)
         plt.title(datetime.fromtimestamp(int(grid_obj[1])))
         if show == True:
@@ -139,9 +141,19 @@ class Mapping:
         if show == True:
             plt.show()
 
+    
+
 if __name__ == "__main__":
     base_map = Mapping()
     grid_obj_list = [([1,2,6,1,0,4,8,1,0,1,2,1,0,8,1,1], 'time1'),
                     ([1,2,6,1,0,4,0,1,0,1,2,1,10,0,1,1], 'time2')]
     # base_map.generate_grid_plot(4, grid_list_list[0], 0.5)
-    base_map.generate_grid_gif(4, grid_obj_list, 0.75)
+    # base_map.generate_grid_gif(4, grid_obj_list, 0.75)
+    latitude = pd.Series(34.42397)
+    longitude = pd.Series(-119.86839)
+    center_lat = 34.413112
+    center_long = -119.855395
+    zoom = 15
+    size = MAX_SIZE
+    scale = 2
+    print(GoogleStaticMapsAPI.to_tile_coordinates(latitude, longitude, center_lat, center_long, zoom, size, scale))
