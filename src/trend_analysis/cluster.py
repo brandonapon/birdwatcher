@@ -4,6 +4,8 @@ import matplotlib as mpl
 import datetime
 import time
 import numpy as np
+import map_plotting
+import os
 from sklearn.cluster import KMeans
 
 mpl.use('TkAgg')
@@ -11,7 +13,8 @@ from mapsplotlib import mapsplot as mplt
 mplt.register_api_key('AIzaSyBmjHKY0e0z090bBg4-qXFpKW4XbdBr2RM')
 
 def cluster(date, time_start, time_end, num_clusters):
-	df = pd.read_csv("/Users/saurabh/Desktop/work/birdwatcher/api/bird_unofficial_api/csv_output.csv")
+	file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../api/bird_unofficial_api/csv_output.csv")
+	df = pd.read_csv(file_path)
 
 	df['datetime'] = df['time_stamp'].apply(lambda x: datetime.datetime.fromtimestamp(x))
 	df['date_string'] = df['datetime'].apply(lambda x: x.strftime('%Y-%m-%d'))
@@ -47,7 +50,8 @@ def cluster(date, time_start, time_end, num_clusters):
 		cluster_dict['color'].append(point_color)
 
 	cluster_df = pd.DataFrame.from_dict(cluster_dict)
-	mplt.plot_markers(cluster_df)
+	# mplt.plot_markers(cluster_df)
+	return cluster_dict
 
 if __name__ == "__main__":
 	date = sys.argv[1]
@@ -55,4 +59,6 @@ if __name__ == "__main__":
 	time_end = sys.argv[3]
 	num_clusters = sys.argv[4]
 
-	cluster(date, time_start, time_end, num_clusters)
+	cluster_dict = cluster(date, time_start, time_end, num_clusters)
+	mp = map_plotting.Mapping()
+	mp.generate_cluster_plot(cluster_dict)

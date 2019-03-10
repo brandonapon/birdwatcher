@@ -14,7 +14,9 @@ from mapsplotlib.google_static_maps_api import GoogleStaticMapsAPI
 from multiprocessing import Pool, Lock, Queue
 
 MAX_SIZE = 600
-PIXEL_LENGTH = 1200
+PIXEL_LENGTH = MAX_SIZE*2
+COLOR = 'binary'
+
 global global_frame_list
 
 class Mapping:
@@ -46,10 +48,10 @@ class Mapping:
         plt.imshow(np.array(img))
         self.base_map = img
         print('Base Map Generation Complete!')
-        # major_ticks = np.arange(0, 1280, 320)
+        # major_ticks = np.arange(0, 1200, 300)
+        # ax = plt.axes()
         # ax.set_xticks(major_ticks)
         # ax.set_yticks(major_ticks)
-        # minor_ticks = np.arange(0, 101, 5)
         # plt.grid()
         # plt.axis('off')
 
@@ -114,7 +116,41 @@ class Mapping:
         plt.clf()
 
     def output_plot(self, filename):
-        plt.savefig(filename)
+        plt.savefig('../../images/'+filename+'.png')
+
+    # takes coordinate pair and returns pixel pair
+    def coordinate_to_pixel(self, latitude, longitude):
+        lat = pd.Series(latitude)
+        lon = pd.Series(longitude)
+        center_lat = 34.413112
+        center_long = -119.855395
+        zoom = 15
+        size = MAX_SIZE
+        scale = 2
+        output_pixels = GoogleStaticMapsAPI.to_tile_coordinates(lat, lon, center_lat, center_long, zoom, size, scale)
+        return output_pixels['x_pixel'][0], output_pixels['y_pixel'][0]
+
+    # Generates plot with passed in location data and color
+    def generate_cluster_plot(self, data_dict, size=5, show=False):
+        # filter points to remove points outside of the map
+        color_dict = {}
+        self.generate_base_map()
+        print(data_dict)
+        print('Generating cluster plot...')
+        for i,color in enumerate(data_dict['color']):
+            if color not in color_dict.keys():
+                color_dict[color] = {'x': [], 'y': []} 
+            x_pixel, y_pixel = self.coordinate_to_pixel(data_dict['latitude'][i], data_dict['longitude'][i])
+            if (x_pixel < 0 or x_pixel > 1200) or (y_pixel < 0 or y_pixel > 1200):
+                continue
+            else:
+                color_dict[color]['x'].append(x_pixel)
+                color_dict[color]['y'].append(y_pixel)
+        for colors in color_dict.keys():
+            print('{}={}'.format(colors, color_dict[colors]))
+            plt.scatter(color_dict[colors]['x'], color_dict[colors]['y'], color=colors, s=size)
+        plt.show()
+        # plot the points
 
     def generate_grid_plot(self, side_length, grid_obj, opacity, show=False):
         print('Starting Plot...')
@@ -126,7 +162,7 @@ class Mapping:
         self.max_val = max(grid_obj[0])
         # print('max = {}'.format(self.max_val))
         array = self.generate_color_grid(side_length, grid_obj[0], opacity)
-        plt.imshow(array, alpha=opacity, cmap=plt.get_cmap('Reds'))
+        plt.imshow(array, alpha=opacity, cmap=plt.get_cmap(COLOR))
         if len(plt.gcf().axes) == 1: 
             plt.clim(vmin = 0, vmax = self.max_val)
             plt.colorbar()
@@ -160,7 +196,7 @@ class Mapping:
             plt.imshow(np.array(self.base_map))
         else:
             self.generate_base_map()
-        plt.imshow(self.frame_list[frame][0], alpha=self.opacity, cmap=plt.get_cmap('Reds'))
+        plt.imshow(self.frame_list[frame][0], alpha=self.opacity, cmap=plt.get_cmap(COLOR))
         plt.title(datetime.fromtimestamp(int(self.frame_list[frame][1])))
         if len(plt.gcf().axes) == 1: 
             plt.clim(vmin = 0, vmax = self.max_val)
@@ -236,9 +272,14 @@ if __name__ == "__main__":
     grid_obj_list = [([1,2,6,1,0,4,8,1,0,1,2,1,0,8,1,1], '1'),
                     ([1,2,6,1,0,4,0,1,0,1,2,1,10,0,1,1], '2')]
     # base_map.initialize_grid(4, grid_obj_list, 0.75)
+
+    # base_map.generate_base_map()
+    # base_map.output_plot('base_map')
+
     # base_map.generate_frames()
     # base_map.generate_grid_plot(4, grid_obj_list[0], 0.5, True)
-    base_map.generate_grid_gif('multi', 4, grid_obj_list, 0.75, multi=True)
+    # base_map.generate_grid_gif('multi', 4, grid_obj_list, 0.75, multi=True)
+
     # latitude = pd.Series(34.42397)
     # longitude = pd.Series(-119.86839)
     # center_lat = 34.413112
@@ -247,3 +288,5 @@ if __name__ == "__main__":
     # size = MAX_SIZE
     # scale = 2
     # print(GoogleStaticMapsAPI.to_tile_coordinates(latitude, longitude, center_lat, center_long, zoom, size, scale))
+
+    print(base_map.coordinate_to_pixel(34.411696666666664, -119.85532333333336))

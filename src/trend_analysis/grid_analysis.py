@@ -243,7 +243,7 @@ def main(analysis_type):
         # base_map.generate_grid_plot(len(points)-1, (concat_rows(freq_grid),'1'), 0.5, True)
         print(res_list[0])
         # base_map.generate_grid_plot(len(points)-1, res_list[0], 0.5, True)
-        base_map.generate_grid_gif('02.19_1hr_50m',len(points)-1, res_list, 0.75, multi=True)
+        base_map.generate_grid_gif('02.19_1hr_50m',len(points)-1, res_list, 0.5, multi=True)
         # ! Printing collected timestamps
         # for timestamp in timestamp_list:
         #     print(datetime.fromtimestamp(int(timestamp)))
