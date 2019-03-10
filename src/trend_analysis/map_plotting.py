@@ -12,6 +12,7 @@ from datetime import datetime
 import time
 from mapsplotlib.google_static_maps_api import GoogleStaticMapsAPI
 from multiprocessing import Pool, Lock, Queue
+import multiprocessing
 
 MAX_SIZE = 600
 PIXEL_LENGTH = MAX_SIZE*2
@@ -236,7 +237,7 @@ class Mapping:
         l = Lock()
         results = []
         self.generate_base_map()
-        pool = Pool(initializer=self.init_multi, initargs=(l, self.side_length, self.grid_obj_list, self.frame_list,  ))
+        pool = Pool(initializer=self.init_multi, initargs=(l, self.side_length, self.grid_obj_list, self.frame_list, ), processes = multiprocessing.cpu_count()-1)
         self.frame_list = [np.array([]) for i in range(self.total_frames)]
         # self.frame_list = pool.map(self.frame_worker, self.frame_list)
         print('Num frames to generate: {}'.format(self.total_frames))
