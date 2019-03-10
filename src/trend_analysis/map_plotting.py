@@ -15,7 +15,7 @@ from multiprocessing import Pool, Lock, Queue
 
 MAX_SIZE = 600
 PIXEL_LENGTH = MAX_SIZE*2
-COLOR = 'binary'
+COLOR = 'Oranges'
 
 global global_frame_list
 
