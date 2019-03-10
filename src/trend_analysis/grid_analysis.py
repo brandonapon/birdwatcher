@@ -159,10 +159,10 @@ def return_unique_timestamps(filename):
     day_df['datetime'] = day_df['time_stamp'].apply(lambda x: datetime.datetime.fromtimestamp(x).time())
     print(day_df['datetime'].unique())
 
-TIME_SPACING = 600
-GRID_SPACING = 600
+TIME_SPACING = 3600
+GRID_SPACING = 120
 
-def main(analysis_type):
+def main(analysis_type, filename_date):
     geod = Geodesic.WGS84  # define the WGS84 ellipsoid
     # An over estimation
     if analysis_type == "under":
@@ -179,7 +179,7 @@ def main(analysis_type):
         #format_result(origin, x_end, y_end)
         points = divide(origin, x_end, y_end, GRID_SPACING) #to get the over-estimated grid
         print(points)
-        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/2019_02_20.csv")
+        output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "daily_csvs/{}.csv".format(filename_date))
         (init_list, init_timestamp, last_timestamp) = intialize_data(output_dir) #to get the first available data of each day(using 02/18)
         print(len(init_list))
         init_count = build_grid_count(points, init_list)#to initialze the count of each area
@@ -234,16 +234,15 @@ def main(analysis_type):
        
         # format_grid(updated_count)
         # print(time)
-
-
+        return res_list, (concat_rows(freq_grid), last_timestamp)
 
 
         ##############Start Plotting##############
-        base_map = map_plotting.Mapping()
+        # base_map = map_plotting.Mapping()
         # base_map.generate_grid_plot(len(points)-1, (concat_rows(freq_grid),'1'), 0.5, True)
         print(res_list[0])
         # base_map.generate_grid_plot(len(points)-1, res_list[0], 0.5, True)
-        base_map.generate_grid_gif('02.20_{}s_{}m'.format(TIME_SPACING, GRID_SPACING),len(points)-1, res_list, 0.5, multi=True)
+        # base_map.generate_grid_gif('02.20_{}s_{}m'.format(TIME_SPACING, GRID_SPACING),len(points)-1, res_list, 0.5, multi=True)
         # ! Printing collected timestamps
         # for timestamp in timestamp_list:
         #     print(datetime.fromtimestamp(int(timestamp)))
@@ -258,4 +257,4 @@ if __name__ == '__main__':
         usage()
         sys.exit(0)
     else:
-        main(sys.argv[1])
+        main(sys.argv[1], '2019_02_20')
